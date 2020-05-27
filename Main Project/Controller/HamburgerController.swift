@@ -30,7 +30,7 @@ class HamburgerController: UIViewController {
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
-                self.userViewInMenu.nameLabel.text = "Please log in"
+                self.userViewInMenu.nameLabel.text = "Пожалуйста, зарегестрируйтесь"
                 self.userViewInMenu.phoneNumberLabel.text = ""
             } else {
                 if let currentUser = user {
@@ -130,7 +130,7 @@ extension HamburgerController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIndetifier, for: indexPath) as! MenuOptionCell
         let modelOption = MenuOptionModel(rawValue: indexPath.row)
         cell.menuOptionLabel.text = modelOption?.description
-        cell.iconImageView.image = UIImage(named: modelOption?.image ?? "Cart")
+        cell.iconImageView.image = UIImage(named: modelOption?.image ?? "cart")
         return cell
     }
     

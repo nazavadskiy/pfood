@@ -36,6 +36,7 @@ class TelephoneRegView: UIView {
     let firstNumberTextField: UITextField = {
         let textField = UITextField()
         textField.text = "🇷🇺 +7"
+        textField.textColor = .black
         return textField
     }()
     
@@ -45,6 +46,7 @@ class TelephoneRegView: UIView {
         textField.clearButtonMode = .whileEditing
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
+        textField.textColor = .black
         return textField
     }()
     
@@ -55,6 +57,7 @@ class TelephoneRegView: UIView {
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
         textField.layer.borderColor = UIColor.orange.cgColor
+        textField.textColor = .black
         return textField
     }()
     

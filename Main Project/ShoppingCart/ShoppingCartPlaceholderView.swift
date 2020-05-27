@@ -24,6 +24,7 @@ class ShoppingCartPlaceholderView: UIView {
     let namePlaceholder: UILabel = {
         let label = UILabel()
         label.text = "Zakaz"
+        label.textColor = .black
         label.font = .systemFont(ofSize: 18)
         return label
     }()

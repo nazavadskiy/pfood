@@ -50,24 +50,26 @@ class ShoppingCartItem: UIView {
         label.text = "1"
         label.textAlignment = .center
         label.backgroundColor = .white
+//        label.textColor = .black
         label.font = .systemFont(ofSize: 18)
         return label
     }()
     
     let plusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .gray
+        button.setImage(UIImage(named: "plus"), for: .normal)
+//        button.setTitle("+", for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         return button
     }()
     
     let minusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("-", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .gray
+        button.setImage(UIImage(named: "minus"), for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         return button
     }()

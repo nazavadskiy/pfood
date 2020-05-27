@@ -23,6 +23,11 @@ class RegistrationView: UIView {
     let name: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Имя пользователя"
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            textField.backgroundColor = .white
+        }
         textField.borderStyle = .roundedRect
         textField.contentHorizontalAlignment = .center
         textField.textContentType = .emailAddress
@@ -33,6 +38,11 @@ class RegistrationView: UIView {
      let adress: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Адрес"
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            textField.backgroundColor = .white
+        }
         textField.borderStyle = .roundedRect
         textField.contentHorizontalAlignment = .center
         textField.font = .systemFont(ofSize: 18)

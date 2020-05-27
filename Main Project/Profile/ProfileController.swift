@@ -40,7 +40,11 @@ class ProfileController: UIViewController {
     //MARK: - ViewDidLoad Method
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         view.addSubview(stack)
         stack.addArrangedSubview(registrationView)
         setUpStack()
@@ -89,12 +93,12 @@ class ProfileController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         let leftButton = UIButton(type: .system)
-        leftButton.setImage(#imageLiteral(resourceName: "Menu-3"), for: .normal)
+        leftButton.setImage(UIImage(named: "lines"), for: .normal)
         leftButton.addTarget(self, action: #selector(openHamburgerAction), for: .touchUpInside)
         leftButton.tintColor = .white
         
         let rightButton = UIButton(type: .system)
-        rightButton.setImage(#imageLiteral(resourceName: "Cart"), for: .normal)
+        rightButton.setImage(UIImage(named: "cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
         
