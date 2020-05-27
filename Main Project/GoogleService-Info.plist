@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>639680834085-apuhkpsuk34lejhho2pplc4ctkbh6oe4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.639680834085-apuhkpsuk34lejhho2pplc4ctkbh6oe4</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>639680834085-u4eep03qko7kp7a7djcfulpvgtgakl8d.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCi7YlX1PHckv9XW7btewM22r0Na24IS9E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>639680834085</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fortnoxpocket.pFood</string>
+	<key>PROJECT_ID</key>
+	<string>pfood-5b1eb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pfood-5b1eb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:639680834085:ios:2b5e0791abe3d646cc2dcc</string>
+	<key>DATABASE_URL</key>
+	<string>https://pfood-5b1eb.firebaseio.com</string>
+</dict>
+</plist>
