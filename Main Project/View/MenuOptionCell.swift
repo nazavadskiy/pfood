@@ -16,6 +16,13 @@ class MenuOptionCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        if #available(iOS 13.0, *) {
+            imageView.tintColor = UIColor(named: "mainColor")
+//            cell.backgroundColor = .systemBackground
+        } else {
+            imageView.tintColor = .black
+//            cell.backgroundColor = .white
+        }
         return imageView
     }()
     
@@ -25,6 +32,11 @@ class MenuOptionCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.text = "test"
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.textColor = .black
+        }
         return label
     }()
     

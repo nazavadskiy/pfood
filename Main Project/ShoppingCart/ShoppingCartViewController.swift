@@ -89,7 +89,7 @@ class ShoppingCartViewController: UIViewController {
     
     let adressTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Введите адрес доставки"
+        textField.placeholder = " Введите адрес доставки"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
         textField.layer.borderColor = UIColor.black.cgColor
@@ -121,7 +121,7 @@ class ShoppingCartViewController: UIViewController {
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
-        textField.placeholder = "Выберите"
+        textField.placeholder = " Выберите"
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 12
@@ -254,7 +254,7 @@ class ShoppingCartViewController: UIViewController {
         leftButton.tintColor = .white
 
         let rightButton = UIButton(type: .system)
-        rightButton.setImage(UIImage(named: "cart"), for: .normal)
+        rightButton.setImage(UIImage(named: "Cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
 
@@ -324,7 +324,7 @@ extension ShoppingCartViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.placeholder == "Выберите" { return false}
+        if textField.placeholder == " Выберите" { return false}
         return true
     }
 }

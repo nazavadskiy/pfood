@@ -36,7 +36,13 @@ class TelephoneRegView: UIView {
     let firstNumberTextField: UITextField = {
         let textField = UITextField()
         textField.text = "🇷🇺 +7"
-        textField.textColor = .black
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = .systemBackground
+            textField.textColor = UIColor(named: "mainColor")
+        } else {
+            textField.backgroundColor = .white
+            textField.textColor = .black
+        }
         return textField
     }()
     
@@ -46,7 +52,13 @@ class TelephoneRegView: UIView {
         textField.clearButtonMode = .whileEditing
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
-        textField.textColor = .black
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = .systemBackground
+            textField.textColor = UIColor(named: "mainColor")
+        } else {
+            textField.backgroundColor = .white
+            textField.textColor = .black
+        }
         return textField
     }()
     
@@ -57,7 +69,13 @@ class TelephoneRegView: UIView {
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
         textField.layer.borderColor = UIColor.orange.cgColor
-        textField.textColor = .black
+        if #available(iOS 13.0, *) {
+            textField.backgroundColor = .systemBackground
+            textField.textColor = UIColor(named: "mainColor")
+        } else {
+            textField.backgroundColor = .white
+            textField.textColor = .black
+        }
         return textField
     }()
     
@@ -69,7 +87,12 @@ class TelephoneRegView: UIView {
     let verifyButton: UIButton = {
         let button = UIButton()
         button.setTitle("ПОДТВЕРДИТЬ НОМЕР ТЕЛЕФОНА", for: .normal)
-        button.backgroundColor = .orange
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = UIColor(named: "mainOrange")
+        } else {
+            button.backgroundColor = .orange
+        }
+        button.layer.cornerRadius = 12
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +114,7 @@ class TelephoneRegView: UIView {
         label.text = "При нажати на \"ПОДТВЕРДИТЬ НОМЕР ТЕЛЕФОНА\" будет отправлено СМС на данный номер"
         label.textColor = .lightGray
         label.numberOfLines = 0
+        label.font = .boldSystemFont(ofSize: 12)
         label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 60).isActive = true

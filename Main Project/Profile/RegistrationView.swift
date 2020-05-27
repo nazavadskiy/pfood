@@ -24,9 +24,11 @@ class RegistrationView: UIView {
         let textField = UITextField()
         textField.placeholder = "Имя пользователя"
         if #available(iOS 13.0, *) {
-            textField.backgroundColor = UIColor(named: "mainColor")
+            textField.backgroundColor = .systemBackground
+            textField.textColor = UIColor(named: "mainColor")
         } else {
             textField.backgroundColor = .white
+            textField.textColor = .black
         }
         textField.borderStyle = .roundedRect
         textField.contentHorizontalAlignment = .center
@@ -39,9 +41,11 @@ class RegistrationView: UIView {
         let textField = UITextField()
         textField.placeholder = "Адрес"
         if #available(iOS 13.0, *) {
-            textField.backgroundColor = UIColor(named: "mainColor")
+            textField.backgroundColor = .systemBackground
+            textField.textColor = UIColor(named: "mainColor")
         } else {
             textField.backgroundColor = .white
+            textField.textColor = .black
         }
         textField.borderStyle = .roundedRect
         textField.contentHorizontalAlignment = .center
@@ -54,8 +58,13 @@ class RegistrationView: UIView {
         button.setTitle("Войти", for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
-        button.backgroundColor = .orange
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.titleLabel!.textColor = .white
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = UIColor(named: "mainOrange")
+        } else {
+            button.backgroundColor = .orange
+        }
         return button
     }()
     
@@ -64,7 +73,12 @@ class RegistrationView: UIView {
         button.setTitle("Выйти", for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
-        button.backgroundColor = .orange
+        button.titleLabel!.textColor = .white
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = UIColor(named: "mainOrange")
+        } else {
+            button.backgroundColor = .orange
+        }
         return button
     }()
     

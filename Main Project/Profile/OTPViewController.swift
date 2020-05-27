@@ -26,7 +26,11 @@ class OTPViewController: UIViewController {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Пожалуйста, введите код подтверждения ниже: "
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.textColor = .black
+        }
         label.font = .boldSystemFont(ofSize: 24)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -36,6 +40,13 @@ class OTPViewController: UIViewController {
     let otpTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите код подтверждения"
+        if #available(iOS 13.0, *) {
+            textField.textColor = UIColor(named: "mainColor")
+            textField.backgroundColor = .systemBackground
+        } else {
+            textField.textColor = .black
+            textField.backgroundColor = .white
+        }
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
         return textField
@@ -44,7 +55,12 @@ class OTPViewController: UIViewController {
     let registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("ВВЕСТИ КОД", for: .normal)
-        button.backgroundColor = .orange
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = UIColor(named: "mainOrange")
+        } else {
+            button.backgroundColor = .orange
+        }
+        button.layer.cornerRadius = 12
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +79,11 @@ class OTPViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         navigationItem.setHidesBackButton(true, animated: false)
         hideKeyboardWhenTappedAround()
         view.addSubview(mainStack)

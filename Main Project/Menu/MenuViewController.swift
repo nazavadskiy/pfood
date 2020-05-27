@@ -87,7 +87,7 @@ class MenuViewController: UIViewController {
         leftButton.tintColor = .white
 
         let rightButton = UIButton(type: .system)
-        rightButton.setImage(UIImage(named: "cart"), for: .normal)
+        rightButton.setImage(UIImage(named: "Cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
 

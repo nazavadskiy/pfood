@@ -58,6 +58,11 @@ class ShoppingCartItem: UIView {
     let plusButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "plus"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.imageView?.tintColor = UIColor(named: "mainColor")
+        } else {
+            button.imageView?.tintColor = .black
+        }
 //        button.setTitle("+", for: .normal)
 //        button.setTitleColor(.white, for: .normal)
 //        button.backgroundColor = .gray
@@ -68,6 +73,11 @@ class ShoppingCartItem: UIView {
     let minusButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "minus"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.imageView?.tintColor = UIColor(named: "mainColor")
+        } else {
+            button.imageView?.tintColor = .black
+        }
 //        button.setTitleColor(.white, for: .normal)
 //        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)

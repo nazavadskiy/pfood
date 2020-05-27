@@ -89,7 +89,6 @@ class ProfileController: UIViewController {
     
     
     func configureNaivationBar() {
-        navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
         
         let leftButton = UIButton(type: .system)
@@ -98,7 +97,7 @@ class ProfileController: UIViewController {
         leftButton.tintColor = .white
         
         let rightButton = UIButton(type: .system)
-        rightButton.setImage(UIImage(named: "cart"), for: .normal)
+        rightButton.setImage(UIImage(named: "Cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
         
@@ -107,6 +106,12 @@ class ProfileController: UIViewController {
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
         titleView.textAlignment = .left
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.barTintColor = UIColor(named: "mainOrange")
+        } else {
+            navigationController?.navigationBar.barTintColor = .orange
+        }
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)

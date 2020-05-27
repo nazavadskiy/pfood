@@ -14,7 +14,7 @@ class UserProfileInMenu: UIView {
     let profileImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .orange
+//        image.backgroundColor = .orange
         return image
     }()
     

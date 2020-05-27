@@ -15,6 +15,17 @@ class TelephoneNumberViewController: UIViewController {
     var telView: TelephoneRegView = {
         let telView = TelephoneRegView()
         telView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 13.0, *) {
+            telView.firstNumberTextField.backgroundColor = .systemBackground
+            telView.otherNumberTextField.backgroundColor = .systemBackground
+            telView.firstNumberTextField.textColor = UIColor(named: "mainColor")
+            telView.otherNumberTextField.textColor = UIColor(named: "mainColor")
+        } else {
+            telView.firstNumberTextField.backgroundColor = .white
+            telView.otherNumberTextField.backgroundColor = .white
+            telView.firstNumberTextField.textColor = .black
+            telView.otherNumberTextField.textColor = .black
+               }
         return telView
     }()
     
@@ -25,7 +36,13 @@ class TelephoneNumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(telView)
-        view.backgroundColor = .white
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
+        
         navigationItem.setHidesBackButton(true, animated: false)
         hideKeyboardWhenTappedAround()
         setUpConstraints()

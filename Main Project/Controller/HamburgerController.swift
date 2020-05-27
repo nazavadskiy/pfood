@@ -23,14 +23,20 @@ class HamburgerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
+        
         configureUserView()
         configureTableView()
         contactsLabel()
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
-                self.userViewInMenu.nameLabel.text = "Пожалуйста, зарегестрируйтесь"
+                self.userViewInMenu.nameLabel.text = "Зарегестрируйтесь"
                 self.userViewInMenu.phoneNumberLabel.text = ""
             } else {
                 if let currentUser = user {
@@ -56,6 +62,11 @@ class HamburgerController: UIViewController {
         userViewInMenu.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         userViewInMenu.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -80).isActive = true
         userViewInMenu.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
+        if #available(iOS 13.0, *) {
+            userViewInMenu.backgroundColor = UIColor(named: "mainOrange")
+        } else {
+            userViewInMenu.backgroundColor = .orange
+        }
     }
     
     func configureTableView() {
@@ -70,7 +81,11 @@ class HamburgerController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: userViewInMenu.bottomAnchor).isActive = true
-        tableView.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = .systemBackground
+        } else {
+            tableView.backgroundColor = .white
+        }
     }
     
     func contactsLabel() {
@@ -83,7 +98,13 @@ class HamburgerController: UIViewController {
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
         label.topAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
     }
     
     var userId: String? {
@@ -131,6 +152,11 @@ extension HamburgerController: UITableViewDataSource, UITableViewDelegate {
         let modelOption = MenuOptionModel(rawValue: indexPath.row)
         cell.menuOptionLabel.text = modelOption?.description
         cell.iconImageView.image = UIImage(named: modelOption?.image ?? "cart")
+        if #available(iOS 13.0, *) {
+            cell.backgroundColor = .systemBackground
+        } else {
+            cell.backgroundColor = .white
+            }
         return cell
     }
     
