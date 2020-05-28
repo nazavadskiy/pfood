@@ -105,7 +105,7 @@ class ProfileController: UIViewController {
         titleView.text = "Профиль"
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
-        titleView.textAlignment = .left
+        titleView.textAlignment = .center
         
         navigationController?.navigationBar.barTintColor = .orange
         

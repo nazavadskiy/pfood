@@ -34,7 +34,11 @@ class RaitingsViewController: UIViewController {
         setUpTableView()
         view.addSubview(joinButton)
         setUpButton()
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +85,12 @@ class RaitingsViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(RaitingCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.separatorStyle = .none
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = .systemBackground
+            
+        } else {
+            tableView.backgroundColor = .white
+        }
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -121,7 +131,7 @@ class RaitingsViewController: UIViewController {
         titleView.text = "Рейтинг"
         titleView.font  = .boldSystemFont(ofSize: 18)
         titleView.textColor = .white
-        titleView.textAlignment = .left
+        titleView.textAlignment = .center
 
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)
@@ -159,7 +169,12 @@ extension RaitingsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nicknameLabel.text = teams[indexPath.row].teamName
         cell.numberLabel.text = String(teams[indexPath.row].teamPlace)
         cell.scoreLabel.text = String(teams[indexPath.row].teamRaiting)
-        cell.layer.backgroundColor = UIColor.white.cgColor
+        
+        if #available(iOS 13.0, *) {
+            cell.layer.backgroundColor = UIColor.systemBackground.cgColor
+        } else {
+            cell.layer.backgroundColor = UIColor.white.cgColor
+        }
 
         cell.layer.masksToBounds = false
         cell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -170,7 +185,7 @@ extension RaitingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,7 +200,13 @@ extension RaitingsViewController: UITableViewDelegate, UITableViewDataSource {
         label.text = "Лучшие 10 команд"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 20)
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         return label
     }
 }

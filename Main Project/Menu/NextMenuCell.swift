@@ -68,6 +68,7 @@ class NextMenuCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Test", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.textAlignment = .center
         button.backgroundColor = .orange
         button.addTarget(self, action: #selector(handleAddItem), for: .touchUpInside)
         return button

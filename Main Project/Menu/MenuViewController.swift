@@ -105,7 +105,8 @@ class MenuViewController: UIViewController {
         titleView.text = "Меню"
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
-        titleView.textAlignment = .left
+        titleView.textAlignment = .center
+//        titleView.backgroundColor = .black
 
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)

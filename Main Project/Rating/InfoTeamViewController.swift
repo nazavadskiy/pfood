@@ -16,7 +16,13 @@ class InfoTeamViewController: UIViewController {
     let titleName: UILabel = {
         let label = UILabel()
         label.text = "Место в рейтинге"
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .boldSystemFont(ofSize: 24)
         return label
     }()
@@ -25,12 +31,23 @@ class InfoTeamViewController: UIViewController {
         let label = UILabel()
         label.text = "Место в рейтинге"
         label.textColor = .lightGray
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         return label
     }()
     
     let raitingPosition: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         return label
     }()
     
@@ -38,12 +55,23 @@ class InfoTeamViewController: UIViewController {
         let label = UILabel()
         label.text = "Баллов у команды"
         label.textColor = .lightGray
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         return label
     }()
     
     let raiting: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         return label
     }()
     
@@ -51,12 +79,23 @@ class InfoTeamViewController: UIViewController {
         let label = UILabel()
         label.text = "Пригласительный код"
         label.textColor = .lightGray
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         return label
     }()
     
     let inviteLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         return label
     }()
     
@@ -81,19 +120,33 @@ class InfoTeamViewController: UIViewController {
     var userNameLabel: UILabel {
         let label = UILabel()
         label.textColor = .lightGray
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         return label
     }
     
     var userPointLabel: UILabel {
         let label = UILabel()
         label.textColor = .lightGray
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         return label
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         setUpStack()
         setUpUI()
         navigationItem.setHidesBackButton(true, animated: false)

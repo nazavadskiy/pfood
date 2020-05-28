@@ -13,7 +13,13 @@ class RaitingCell: UITableViewCell {
     let numberLabel: UILabel = {
        let label = UILabel()
         label.text = "1"
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .systemFont(ofSize: 24)
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
@@ -22,7 +28,11 @@ class RaitingCell: UITableViewCell {
     let separator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            view.backgroundColor = .black
+        }
         view.widthAnchor.constraint(equalToConstant: 1).isActive = true
         view.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         return view
@@ -32,7 +42,13 @@ class RaitingCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "test"
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .systemFont(ofSize: 24)
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
@@ -41,7 +57,13 @@ class RaitingCell: UITableViewCell {
     let scoreLabel: UILabel = {
         let label = UILabel()
         label.text = "test"
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .systemFont(ofSize: 24)
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
