@@ -18,10 +18,8 @@ class MenuOptionCell: UITableViewCell {
         imageView.clipsToBounds = true
         if #available(iOS 13.0, *) {
             imageView.tintColor = UIColor(named: "mainColor")
-//            cell.backgroundColor = .systemBackground
         } else {
             imageView.tintColor = .black
-//            cell.backgroundColor = .white
         }
         return imageView
     }()
@@ -30,7 +28,7 @@ class MenuOptionCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 18)
-        label.textColor = .black
+        
         label.text = "test"
         if #available(iOS 13.0, *) {
             label.textColor = UIColor(named: "mainColor")

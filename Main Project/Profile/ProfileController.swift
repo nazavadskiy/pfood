@@ -107,11 +107,7 @@ class ProfileController: UIViewController {
         titleView.textColor = .white
         titleView.textAlignment = .left
         
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.barTintColor = UIColor(named: "mainOrange")
-        } else {
-            navigationController?.navigationBar.barTintColor = .orange
-        }
+        navigationController?.navigationBar.barTintColor = .orange
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)

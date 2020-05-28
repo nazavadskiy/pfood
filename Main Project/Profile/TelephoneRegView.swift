@@ -87,11 +87,7 @@ class TelephoneRegView: UIView {
     let verifyButton: UIButton = {
         let button = UIButton()
         button.setTitle("ПОДТВЕРДИТЬ НОМЕР ТЕЛЕФОНА", for: .normal)
-        if #available(iOS 13.0, *) {
-            button.backgroundColor = UIColor(named: "mainOrange")
-        } else {
-            button.backgroundColor = .orange
-        }
+        button.backgroundColor = .orange
         button.layer.cornerRadius = 12
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)

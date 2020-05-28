@@ -60,11 +60,7 @@ class RegistrationView: UIView {
         button.layer.masksToBounds = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.titleLabel!.textColor = .white
-        if #available(iOS 13.0, *) {
-            button.backgroundColor = UIColor(named: "mainOrange")
-        } else {
-            button.backgroundColor = .orange
-        }
+        button.backgroundColor = .orange
         return button
     }()
     
@@ -74,11 +70,7 @@ class RegistrationView: UIView {
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
         button.titleLabel!.textColor = .white
-        if #available(iOS 13.0, *) {
-            button.backgroundColor = UIColor(named: "mainOrange")
-        } else {
-            button.backgroundColor = .orange
-        }
+        button.backgroundColor = .orange
         return button
     }()
     

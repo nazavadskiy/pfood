@@ -62,11 +62,7 @@ class HamburgerController: UIViewController {
         userViewInMenu.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         userViewInMenu.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -80).isActive = true
         userViewInMenu.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
-        if #available(iOS 13.0, *) {
-            userViewInMenu.backgroundColor = UIColor(named: "mainOrange")
-        } else {
-            userViewInMenu.backgroundColor = .orange
-        }
+        userViewInMenu.backgroundColor = .orange
     }
     
     func configureTableView() {

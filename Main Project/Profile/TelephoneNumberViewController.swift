@@ -69,7 +69,14 @@ class TelephoneNumberViewController: UIViewController {
         PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (verificationID, error) in
             if error == nil {
                 UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                self.navigationController?.pushViewController(OTPViewController(), animated: true)
+                
+                let OTP = OTPViewController()
+                if #available(iOS 13.0, *) {
+                    OTP.otpTextField.backgroundColor = .systemFill
+                } else {
+                    OTP.otpTextField.backgroundColor = .white
+                }
+                self.navigationController?.pushViewController(OTP, animated: true)
             } else {
                 self.telView.mainStack.insertArrangedSubview(self.telView.errorLabel, at: 0)
                 self.telView.errorLabel.text = error?.localizedDescription

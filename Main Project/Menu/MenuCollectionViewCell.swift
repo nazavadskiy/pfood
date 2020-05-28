@@ -31,8 +31,13 @@ class MenuCollectionViewCell: UICollectionViewCell {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.sizeToFit()
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = .systemGray5
+             button.setTitleColor(UIColor(named: "mainColor"), for: .normal)
+        } else {
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
+        }
         return button
     }()
     
@@ -53,7 +58,11 @@ class MenuCollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 4
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            layer.shadowColor = UIColor.systemGray.cgColor
+        } else {
+            layer.shadowColor = UIColor.gray.cgColor
+        }
 
         contentView.layer.cornerRadius = 12
         contentView.clipsToBounds = true

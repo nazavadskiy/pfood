@@ -42,7 +42,7 @@ class OTPViewController: UIViewController {
         textField.placeholder = "Введите код подтверждения"
         if #available(iOS 13.0, *) {
             textField.textColor = UIColor(named: "mainColor")
-            textField.backgroundColor = .systemBackground
+            textField.backgroundColor = .systemFill
         } else {
             textField.textColor = .black
             textField.backgroundColor = .white
@@ -55,11 +55,7 @@ class OTPViewController: UIViewController {
     let registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("ВВЕСТИ КОД", for: .normal)
-        if #available(iOS 13.0, *) {
-            button.backgroundColor = UIColor(named: "mainOrange")
-        } else {
-            button.backgroundColor = .orange
-        }
+        button.backgroundColor = .orange
         button.layer.cornerRadius = 12
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)

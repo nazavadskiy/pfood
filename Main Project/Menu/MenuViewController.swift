@@ -18,7 +18,7 @@ class MenuViewController: UIViewController {
     //MARK: - Properties
     weak  var barDelegate: MenuControllerDelegate?
     
-    lazy var collectiomView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let width = UIScreen.main.bounds.width
@@ -27,11 +27,12 @@ class MenuViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 50
         
-        let collectiomView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectiomView.delegate = self
-        collectiomView.dataSource = self
-        collectiomView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: reusableIdentifier)
-        return collectiomView
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: reusableIdentifier)
+        
+        return collectionView
     }()
     
     //MARK: - Init
@@ -50,11 +51,15 @@ class MenuViewController: UIViewController {
                     imageURL = (firstInCategory.value as? NSDictionary)?["imageUrl"] as? String ?? ""
                     let menuModel = MenuModel(name: name, imageURL: imageURL)
                     self.modelArray.append(menuModel)
-                    self.collectiomView.reloadData()
+                    self.collectionView.reloadData()
                 }
             }
         }
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         configureNaivationBar()
         configureCollectionView()
     }
@@ -68,18 +73,23 @@ class MenuViewController: UIViewController {
     //MARK: - Configure UI
     
     func configureCollectionView() {
-        view.addSubview(collectiomView)
-        collectiomView.translatesAutoresizingMaskIntoConstraints = false
-        collectiomView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectiomView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectiomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        collectiomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        collectiomView.backgroundColor = .white
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        if #available(iOS 13.0, *) {
+            collectionView.backgroundColor = .systemBackground
+        } else {
+            collectionView.backgroundColor = .white
+        }
     }
     
     func configureNaivationBar() {
         navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor  = .white
         
         let leftButton = UIButton(type: .system)
         leftButton.setImage(UIImage(named: "lines"), for: .normal)
