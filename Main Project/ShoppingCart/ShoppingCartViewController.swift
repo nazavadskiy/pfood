@@ -125,7 +125,8 @@ class ShoppingCartViewController: UIViewController {
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
-        textField.placeholder = " Выберите"
+        textField.textAlignment = .center
+        textField.placeholder = "Выберите"
         if #available(iOS 13.0, *) {
             textField.layer.borderColor = UIColor.systemGray5.cgColor
         } else {
