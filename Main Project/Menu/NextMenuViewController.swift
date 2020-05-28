@@ -19,7 +19,7 @@ class NextMenuViewController: UIViewController {
     
     
     //MARK: - Properties
-    var collectiomView: UICollectionView!
+    var collectionView: UICollectionView!
     var titleText: String?
     
     //MARK: - Init
@@ -42,9 +42,14 @@ class NextMenuViewController: UIViewController {
                 print(newNextMenuModel)
                 self.nextMenuModelArray.append(newNextMenuModel)
                 print(self.nextMenuModelArray)
-                self.collectiomView.reloadData()
-                
+                self.collectionView.reloadData()
             }
+        }
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
         }
                     
         configureCollectionView()
@@ -62,18 +67,22 @@ class NextMenuViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 50
         
-        collectiomView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectiomView.delegate = self
-        collectiomView.dataSource = self
-        collectiomView.register(NextMenuCell.self, forCellWithReuseIdentifier: reusableIdentifier)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(NextMenuCell.self, forCellWithReuseIdentifier: reusableIdentifier)
         
-        view.addSubview(collectiomView)
-        collectiomView.translatesAutoresizingMaskIntoConstraints = false
-        collectiomView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectiomView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectiomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        collectiomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        collectiomView.backgroundColor = .white
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
     }
 
     

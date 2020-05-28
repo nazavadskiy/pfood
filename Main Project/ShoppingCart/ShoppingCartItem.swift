@@ -49,8 +49,11 @@ class ShoppingCartItem: UIView {
         let label = UILabel()
         label.text = "1"
         label.textAlignment = .center
-        label.backgroundColor = .white
-//        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -63,9 +66,6 @@ class ShoppingCartItem: UIView {
         } else {
             button.imageView?.tintColor = .black
         }
-//        button.setTitle("+", for: .normal)
-//        button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -78,8 +78,6 @@ class ShoppingCartItem: UIView {
         } else {
             button.imageView?.tintColor = .black
         }
-//        button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         return button
     }()

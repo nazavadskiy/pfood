@@ -50,6 +50,11 @@ class DetailItemViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "text"
         label.font = .boldSystemFont(ofSize: 28)
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.textColor = .black
+        }
         return label
     }()
     
@@ -113,7 +118,13 @@ class DetailItemViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "1"
         label.textAlignment = .center
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -140,7 +151,11 @@ class DetailItemViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
         
         let scrollView = UIScrollView(frame: .zero)
         addSubview(scrollView)

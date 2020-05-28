@@ -92,7 +92,11 @@ class ShoppingCartViewController: UIViewController {
         textField.placeholder = " Введите адрес доставки"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
-        textField.layer.borderColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            textField.layer.borderColor = UIColor.systemGray5.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.gray.cgColor
+        }
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
@@ -122,7 +126,11 @@ class ShoppingCartViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
         textField.placeholder = " Выберите"
-        textField.layer.borderColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            textField.layer.borderColor = UIColor.systemGray5.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.gray.cgColor
+        }
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
@@ -178,7 +186,11 @@ class ShoppingCartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)

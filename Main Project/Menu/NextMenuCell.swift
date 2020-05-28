@@ -52,7 +52,13 @@ class NextMenuCell: UICollectionViewCell {
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemGray5
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.backgroundColor = .white
+            label.textColor = .black
+        }
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -87,7 +93,11 @@ class NextMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "\(self.count)"
         label.textAlignment = .center
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         label.font = .systemFont(ofSize: 18)
         return label
     }()

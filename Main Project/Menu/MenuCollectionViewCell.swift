@@ -30,7 +30,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         button.setTitle("Test", for: .normal)
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
-        button.titleLabel?.sizeToFit()
+        button.titleLabel?.sizeToFit() 
         if #available(iOS 13.0, *) {
             button.backgroundColor = .systemGray5
              button.setTitleColor(UIColor(named: "mainColor"), for: .normal)
