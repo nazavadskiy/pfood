@@ -119,6 +119,7 @@ class ProfileController: UIViewController {
     
     @objc func openHamburgerAction() {
         barDelegate?.hamburgerButtonDidTap()
+        
         print("hello")
     }
     

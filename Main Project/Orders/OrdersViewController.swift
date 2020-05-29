@@ -16,6 +16,11 @@ class OrdersViewController: UIViewController {
         tableView.register(InfoOrderView.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = .systemBackground
+        } else {
+            tableView.backgroundColor = .white
+        }
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -38,7 +43,11 @@ class OrdersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -51,12 +60,12 @@ class OrdersViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         let leftButton = UIButton(type: .system)
-        leftButton.setImage(#imageLiteral(resourceName: "Menu-3"), for: .normal)
+        leftButton.setImage(UIImage(named: "lines"), for: .normal)
         leftButton.addTarget(self, action: #selector(openHamburgerAction), for: .touchUpInside)
         leftButton.tintColor = .white
         
         let rightButton = UIButton(type: .system)
-        rightButton.setImage(#imageLiteral(resourceName: "Cart"), for: .normal)
+        rightButton.setImage(UIImage(named: "Cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
         
