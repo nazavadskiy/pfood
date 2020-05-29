@@ -95,7 +95,7 @@
 		D49D4F7124164D7900797617 /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49D4F7024164D7900797617 /* MainNavigationBar.swift */; };
 		D4E3671C242F65BF00F8D885 /* DeteilItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3671B242F65BF00F8D885 /* DeteilItemViewCell.swift */; };
 		D4E3672C2435353E00F8D885 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3672B2435353E00F8D885 /* LinkedList.swift */; };
-		D4E3672E243536B100F8D885 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D4E3672E243536B100F8D885 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F8AE8850E4E6F2E61EE42A4E /* Pods_Main_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A4D9768CE659E73CB9E6CA /* Pods_Main_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,7 +116,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D4E3672E243536B100F8D885 /* BuildFile in Embed Frameworks */,
+				D4E3672E243536B100F8D885 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +166,7 @@
 		0292EFAA240EDA2800A45FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0292EFAC240EDA2800A45FFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0292EFAE240EDA2800A45FFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0292EFB3240EDA2E00A45FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0292EFB3240EDA2E00A45FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Main Project/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		0292EFB6240EDA2E00A45FFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0292EFB8240EDA2E00A45FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0292EFC2240EFF2F00A45FFC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -921,7 +921,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AAL6YXAZ9T;
 				INFOPLIST_FILE = "Main Project/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -942,7 +942,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AAL6YXAZ9T;
 				INFOPLIST_FILE = "Main Project/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

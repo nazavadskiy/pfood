@@ -277,12 +277,12 @@ class ShoppingCartViewController: UIViewController {
         barDelegate?.hamburgerButtonDidTap()
     }
     
-    @objc func openShoppingCardAction() {
-        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
-            rootVC.hamburgerMenuController.delegate?.handleMenuToggle(forMenuOption: MenuOptionModel.ShoppingCard)
-        }
-        barDelegate?.shoppingCartButtonDidTap()
-    }
+//    @objc func openShoppingCardAction() {
+//        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+//            rootVC.hamburgerMenuController.delegate?.handleMenuToggle(forMenuOption: MenuOptionModel.ShoppingCard)
+//        }
+//        barDelegate?.shoppingCartButtonDidTap()
+//    }
     
     var isKeyboardShown = false
 }

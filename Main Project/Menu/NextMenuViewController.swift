@@ -79,9 +79,9 @@ class NextMenuViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
+            collectionView.backgroundColor = .systemBackground
         } else {
-            view.backgroundColor = .white
+            collectionView.backgroundColor = .white
         }
     }
 
