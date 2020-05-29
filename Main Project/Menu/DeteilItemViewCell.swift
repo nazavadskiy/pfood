@@ -50,6 +50,8 @@ class DetailItemViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "text"
         label.font = .boldSystemFont(ofSize: 28)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         if #available(iOS 13.0, *) {
             label.textColor = UIColor(named: "mainColor")
         } else {
