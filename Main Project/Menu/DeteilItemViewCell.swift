@@ -50,6 +50,8 @@ class DetailItemViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "text"
         label.font = .boldSystemFont(ofSize: 28)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         if #available(iOS 13.0, *) {
             label.textColor = UIColor(named: "mainColor")
         } else {
@@ -169,9 +171,9 @@ class DetailItemViewCell: UICollectionViewCell {
         mainStack.addArrangedSubview(mainImage)
         mainStack.addArrangedSubview(nameTitle)
         mainStack.addArrangedSubview(price)
+        mainStack.addArrangedSubview(bottomView)
         mainStack.addArrangedSubview(descriptionLabel)
         mainStack.addArrangedSubview(productsLabel)
-        mainStack.addArrangedSubview(bottomView)
         
         buttonStack.addArrangedSubview(minusButton)
         buttonStack.addArrangedSubview(numberItem)
@@ -181,10 +183,10 @@ class DetailItemViewCell: UICollectionViewCell {
         bottomView.addSubview(buttonStack)
         buttonStack.isHidden = true
         
-        mainStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
-        mainStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
-        mainStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
-        mainStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: -32).isActive = true
+        mainStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
+        mainStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0).isActive = true
+        mainStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 0).isActive = true
+        mainStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: 0).isActive = true
         mainStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20).isActive = true
         
         button.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
@@ -193,8 +195,8 @@ class DetailItemViewCell: UICollectionViewCell {
         button.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
         
         buttonStack.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
-        buttonStack.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor).isActive = true
-        buttonStack.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor).isActive = true
+        buttonStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
+        buttonStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
         buttonStack.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
         setUpUI()
         
