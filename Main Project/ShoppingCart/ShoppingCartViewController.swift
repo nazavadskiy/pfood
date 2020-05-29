@@ -89,7 +89,7 @@ class ShoppingCartViewController: UIViewController {
     
     let adressTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = " Введите адрес доставки"
+        textField.placeholder = "Введите адрес доставки"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
         if #available(iOS 13.0, *) {
@@ -97,9 +97,10 @@ class ShoppingCartViewController: UIViewController {
         } else {
             textField.layer.borderColor = UIColor.gray.cgColor
         }
-        textField.layer.borderWidth = 2
-        textField.layer.cornerRadius = 12
+//        textField.layer.borderWidth = 2
+//        textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
+        textField.borderStyle = .roundedRect
         textField.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return textField
     }()
@@ -125,16 +126,17 @@ class ShoppingCartViewController: UIViewController {
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .systemFont(ofSize: 18)
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         textField.placeholder = "Выберите"
         if #available(iOS 13.0, *) {
             textField.layer.borderColor = UIColor.systemGray5.cgColor
         } else {
             textField.layer.borderColor = UIColor.gray.cgColor
         }
-        textField.layer.borderWidth = 2
-        textField.layer.cornerRadius = 12
+//        textField.layer.borderWidth = 2
+//        textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
+        textField.borderStyle = .roundedRect
         textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return textField
     }()

@@ -177,10 +177,6 @@ extension RaitingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         cell.layer.masksToBounds = false
-        cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.shadowRadius = 0.0
         return cell
     }
     
