@@ -14,10 +14,10 @@ class RaitingCell: UITableViewCell {
        let label = UILabel()
         label.text = "1"
         if #available(iOS 13.0, *) {
-            label.backgroundColor = .systemBackground
+//            label.backgroundColor = .systemBackground
             label.textColor = UIColor(named: "mainColor")
         } else {
-            label.backgroundColor = .white
+//            label.backgroundColor = .white
             label.textColor = .black
         }
         label.font = .systemFont(ofSize: 24)
@@ -43,10 +43,10 @@ class RaitingCell: UITableViewCell {
         label.textAlignment = .left
         label.text = "test"
         if #available(iOS 13.0, *) {
-            label.backgroundColor = .systemBackground
+//            label.backgroundColor = .systemBackground
             label.textColor = UIColor(named: "mainColor")
         } else {
-            label.backgroundColor = .white
+//            label.backgroundColor = .white
             label.textColor = .black
         }
         label.font = .systemFont(ofSize: 24)
@@ -58,10 +58,10 @@ class RaitingCell: UITableViewCell {
         let label = UILabel()
         label.text = "test"
         if #available(iOS 13.0, *) {
-            label.backgroundColor = .systemBackground
+//            label.backgroundColor = .systemBackground
             label.textColor = UIColor(named: "mainColor")
         } else {
-            label.backgroundColor = .white
+//            label.backgroundColor = .white
             label.textColor = .black
         }
         label.font = .systemFont(ofSize: 24)

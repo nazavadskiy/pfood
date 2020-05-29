@@ -103,7 +103,6 @@ class MainNavigationBar: UINavigationBar {
         view.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 2).isActive = true
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
