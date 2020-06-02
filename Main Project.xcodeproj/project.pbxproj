@@ -93,7 +93,6 @@
 		D49D4F6D2415C41C00797617 /* ShoppingCardControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49D4F6C2415C41C00797617 /* ShoppingCardControllerDelegate.swift */; };
 		D49D4F6F2415C97B00797617 /* HamburgerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49D4F6E2415C97B00797617 /* HamburgerRouter.swift */; };
 		D49D4F7124164D7900797617 /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49D4F7024164D7900797617 /* MainNavigationBar.swift */; };
-		D4E3671C242F65BF00F8D885 /* DeteilItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3671B242F65BF00F8D885 /* DeteilItemViewCell.swift */; };
 		D4E3672C2435353E00F8D885 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3672B2435353E00F8D885 /* LinkedList.swift */; };
 		D4E3672E243536B100F8D885 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F8AE8850E4E6F2E61EE42A4E /* Pods_Main_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A4D9768CE659E73CB9E6CA /* Pods_Main_Project.framework */; };
@@ -214,7 +213,6 @@
 		D49D4F6C2415C41C00797617 /* ShoppingCardControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCardControllerDelegate.swift; sourceTree = "<group>"; };
 		D49D4F6E2415C97B00797617 /* HamburgerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerRouter.swift; sourceTree = "<group>"; };
 		D49D4F7024164D7900797617 /* MainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationBar.swift; sourceTree = "<group>"; };
-		D4E3671B242F65BF00F8D885 /* DeteilItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeteilItemViewCell.swift; sourceTree = "<group>"; };
 		D4E367212435352200F8D885 /* pFoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pFoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E367252435352200F8D885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4E3672B2435353E00F8D885 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -483,7 +481,6 @@
 				025DACAA241541FD00EF3E89 /* NextMenuCell.swift */,
 				02E2B12E241E537300BE2A83 /* NextMenuModel.swift */,
 				0277E6C1241F8E1900F4E5A3 /* DetailItemViewController.swift */,
-				D4E3671B242F65BF00F8D885 /* DeteilItemViewCell.swift */,
 			);
 			name = NextMenu;
 			sourceTree = "<group>";
@@ -722,7 +719,6 @@
 				D49D4F5B2415ACB800797617 /* MenuControllerDelegate.swift in Sources */,
 				D49D4F6B2415C3E900797617 /* ShoppingCartCoordinator.swift in Sources */,
 				D49D4F6F2415C97B00797617 /* HamburgerRouter.swift in Sources */,
-				D4E3671C242F65BF00F8D885 /* DeteilItemViewCell.swift in Sources */,
 				02051FD624264F5C00905DD2 /* AddUserResponse.swift in Sources */,
 				D44A25762424D89400093B59 /* HTTPTask.swift in Sources */,
 				02E2B125241E311500BE2A83 /* OrdersViewController.swift in Sources */,

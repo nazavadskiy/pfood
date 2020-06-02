@@ -104,7 +104,7 @@ extension NextMenuViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailItemViewController()
-        detailVC.items = nextMenuModelArray
+        detailVC.item = nextMenuModelArray[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
