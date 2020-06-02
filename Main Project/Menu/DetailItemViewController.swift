@@ -173,7 +173,7 @@ class DetailItemViewController: UIViewController {
         mainStack.addArrangedSubview(descriptionLabel)
         mainStack.addArrangedSubview(productsLabel)
         
-        mainImage.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        mainImage.heightAnchor.constraint(equalToConstant: view.frame.width - 40).isActive = true
         
         buttonStack.addArrangedSubview(minusButton)
         buttonStack.addArrangedSubview(numberItem)
