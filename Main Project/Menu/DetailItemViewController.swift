@@ -42,6 +42,7 @@ class DetailItemViewController: UIViewController {
     var mainImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
+//        image.heightAnchor.constraint(equalTo: ).isActive
         return image
     }()
     
@@ -168,9 +169,11 @@ class DetailItemViewController: UIViewController {
         mainStack.addArrangedSubview(mainImage)
         mainStack.addArrangedSubview(nameTitle)
         mainStack.addArrangedSubview(price)
+        mainStack.addArrangedSubview(bottomView)
         mainStack.addArrangedSubview(descriptionLabel)
         mainStack.addArrangedSubview(productsLabel)
-        mainStack.addArrangedSubview(bottomView)
+        
+        mainImage.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
         buttonStack.addArrangedSubview(minusButton)
         buttonStack.addArrangedSubview(numberItem)
