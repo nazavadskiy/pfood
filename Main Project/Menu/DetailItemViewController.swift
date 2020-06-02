@@ -163,6 +163,8 @@ class DetailItemViewController: UIViewController {
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.contentInset.bottom += 10
         
         scrollView.addSubview(mainStack)
@@ -188,6 +190,7 @@ class DetailItemViewController: UIViewController {
         mainStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
         mainStack.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -32).isActive = true
         mainStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20).isActive = true
+        mainStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
         button.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
         button.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor).isActive = true
