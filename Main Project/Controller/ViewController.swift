@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var hamburgerMenuController: HamburgerController!
     var centerController: UIViewController?
     
+    private var animator: UIViewPropertyAnimator!
+    
     lazy var router: HamburgerRouter = {
         let router = HamburgerRouter()
         router.controller = self
@@ -41,22 +43,44 @@ class ViewController: UIViewController {
         
     //MARK: - Handlers
     
-    @objc func swipeGesture(_ gestureRecognizer : UISwipeGestureRecognizer) {        
-        if gestureRecognizer.state == .began {
-            startedLocation = gestureRecognizer.location(in: view)
-        }
-        
-        if let startedLocation = startedLocation, gestureRecognizer.state == .ended {
-            self.startedLocation = nil
-            let location = gestureRecognizer.location(in: view)
-            if startedLocation.y + 100 > location.y && startedLocation.y - 100 < location.y {
-                if location.x - startedLocation.x > 100 {
-                    self.openHambergerMenu()
-                    self.view.endEditing(true)
-                } else if startedLocation.x - location.x > 100 {
-                    self.closeHumburgerMenu()
-                }
+    @objc func swipeGesture(_ gestureRecognizer : UIPanGestureRecognizer) {
+//        if gestureRecognizer.state == .began {
+//            startedLocation = gestureRecognizer.location(in: view)
+//        }
+//
+//        if let startedLocation = startedLocation, gestureRecognizer.state == .ended {
+//            self.startedLocation = nil
+//            let location = gestureRecognizer.location(in: view)
+//            if startedLocation.y + 100 > location.y && startedLocation.y - 100 < location.y {
+//                if location.x - startedLocation.x > 100 {
+//                    self.openHambergerMenu()
+//                    self.view.endEditing(true)
+//                } else if startedLocation.x - location.x > 100 {
+//                    self.closeHumburgerMenu()
+//                }
+//            }
+//        }
+        switch gestureRecognizer.state {
+        case .began:
+            guard let centerController = centerController else { return }
+            animator = UIViewPropertyAnimator(duration: 0.4, timingParameters: UISpringTimingParameters(mass: 0.2, stiffness: 50.0, damping: 7.0, initialVelocity: .zero))
+            animator.addAnimations {
+                centerController.view.frame.origin.x = centerController.view.frame.width - 80
             }
+            animator.pauseAnimation()
+            
+        case .changed:
+            animator.fractionComplete = gestureRecognizer.translation(in: view).x / view.bounds.size.width
+            
+        case .ended:
+            if animator.fractionComplete <= 0.2 {
+                animator.isReversed = true
+            }
+
+            animator.startAnimation()
+            
+        default:
+            ()
         }
     }
 
