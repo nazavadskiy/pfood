@@ -99,6 +99,18 @@ extension NextMenuViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! NextMenuCell
         cell.item = nextMenuModelArray[indexPath.row]
+        let urlText = nextMenuModelArray[indexPath.row].imageURL
+        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return MenuCollectionViewCell()}
+        
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url) {
+                guard UIImage(data: data) != nil else { return }
+                DispatchQueue.main.async {
+                    cell.itemImageView.kf.indicatorType = .activity
+                    cell.itemImageView.kf.setImage(with: url)
+                }
+            }
+        }
         return cell
     }
     

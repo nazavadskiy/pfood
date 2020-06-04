@@ -29,18 +29,18 @@ class NextMenuCell: UICollectionViewCell {
             itemLabel.text = newValue.name
             itemButton.setTitle(String(newValue.price) + " ₽", for: .normal)
 //            itemImageView.load(model: newValue)
-            let urlText = newValue.imageURL
-            guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
-            
-            DispatchQueue.global().async { [weak self] in
-                if let data = try? Data(contentsOf: url) {
-                    guard UIImage(data: data) != nil else { return }
-                    DispatchQueue.main.async {
-                        self!.itemImageView.kf.indicatorType = .activity
-                        self!.itemImageView.kf.setImage(with: url)
-                    }
-                }
-            }
+//            let urlText = newValue.imageURL
+//            guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
+//
+//            DispatchQueue.global().async { [weak self] in
+//                if let data = try? Data(contentsOf: url) {
+//                    guard UIImage(data: data) != nil else { return }
+//                    DispatchQueue.main.async {
+//                        self!.itemImageView.kf.indicatorType = .activity
+//                        self!.itemImageView.kf.setImage(with: url)
+//                    }
+//                }
+//            }
             count = ShoppingCart.shared.items[newValue] ?? 0
         }
     }

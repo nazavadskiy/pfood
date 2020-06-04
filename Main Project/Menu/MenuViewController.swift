@@ -147,7 +147,7 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let urlText = modelArray[indexPath.row].imageURL
         guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return MenuCollectionViewCell()}
         
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
                 guard UIImage(data: data) != nil else { return }
                 DispatchQueue.main.async {
