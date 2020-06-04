@@ -50,12 +50,12 @@ class ViewController: UIViewController {
             
             if translation > 0 { //right
                 guard let centerController = centerController else { return }
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                     centerController.view.frame.origin.x = centerController.view.frame.width - 80
                 }, completion: nil)
             } else { //left
                 guard let centerController = centerController else { return }
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                     centerController.view.frame.origin.x = 0
                 }, completion: nil)
             }
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     func openHambergerMenu() {
         self.view.endEditing(true)
         guard let centerController = centerController else { return }
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             centerController.view.frame.origin.x = centerController.view.frame.width - 80
         }, completion: nil)
     }
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
     func closeHumburgerMenu(preparingAction: ((Bool) -> Void)? = nil) {
         preparingAction?(true)
         guard let centerController = centerController else { return }
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             centerController.view.frame.origin.x = 0
         }, completion: nil)
     }

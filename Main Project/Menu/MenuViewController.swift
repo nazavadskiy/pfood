@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 private let reusableIdentifier = "myCell"
 
@@ -142,7 +143,21 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MenuCollectionViewCell
         cell.itemButton.setTitle(String(modelArray[indexPath.row].name), for: .normal)
-        cell.itemImageView.load(mainModel: modelArray[indexPath.row])
+        
+        let urlText = modelArray[indexPath.row].imageURL
+        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return MenuCollectionViewCell()}
+        
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                guard UIImage(data: data) != nil else { return }
+                DispatchQueue.main.async {
+                    cell.itemImageView.kf.indicatorType = .activity
+                    cell.itemImageView.kf.setImage(with: url)
+                }
+            }
+        }
+        
+        
         return cell
     }
     

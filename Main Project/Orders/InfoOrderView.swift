@@ -64,7 +64,11 @@ class InfoOrderView: UITableViewCell {
     
     let seperator: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            view.backgroundColor = .black
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
         view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
        return view

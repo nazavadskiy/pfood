@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NextMenuCell: UICollectionViewCell {
     //MARK: - Properties
@@ -27,7 +28,19 @@ class NextMenuCell: UICollectionViewCell {
             guard let newValue = newValue else { return }
             itemLabel.text = newValue.name
             itemButton.setTitle(String(newValue.price) + " ₽", for: .normal)
-            itemImageView.load(model: newValue)
+//            itemImageView.load(model: newValue)
+            let urlText = newValue.imageURL
+            guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
+            
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url) {
+                    guard UIImage(data: data) != nil else { return }
+                    DispatchQueue.main.async {
+                        self!.itemImageView.kf.indicatorType = .activity
+                        self!.itemImageView.kf.setImage(with: url)
+                    }
+                }
+            }
             count = ShoppingCart.shared.items[newValue] ?? 0
         }
     }

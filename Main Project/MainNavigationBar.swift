@@ -34,7 +34,6 @@ class MainNavigationBar: UINavigationBar {
         leftButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         leftButton.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor).isActive = true
-//        leftButton.trailingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
         
         rightButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
         rightButton.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
