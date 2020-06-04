@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     //MARK: - Handlers
     
     @objc func swipeGesture(_ gestureRecognizer : UIPanGestureRecognizer) {
+        self.view.endEditing(true)
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             
             let translation = gestureRecognizer.translation(in: self.view).x
@@ -116,6 +117,7 @@ class ViewController: UIViewController {
     // MARK: Open/Close Hamburger
     
     func openHambergerMenu() {
+        self.view.endEditing(true)
         guard let centerController = centerController else { return }
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             centerController.view.frame.origin.x = centerController.view.frame.width - 80
