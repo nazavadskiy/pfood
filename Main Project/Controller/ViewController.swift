@@ -43,28 +43,47 @@ class ViewController: UIViewController {
     //MARK: - Handlers
     
     @objc func swipeGesture(_ gestureRecognizer : UIPanGestureRecognizer) {
-        switch gestureRecognizer.state {
-        case .began:
-            guard let centerController = centerController else { return }
-            animator = UIViewPropertyAnimator(duration: 0.4, timingParameters: UISpringTimingParameters(mass: 0.2, stiffness: 50.0, damping: 7.0, initialVelocity: .zero))
-            animator.addAnimations {
-                centerController.view.frame.origin.x = centerController.view.frame.width - 80
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            
+            let translation = gestureRecognizer.translation(in: self.view).x
+            
+            if translation > 0 { //right
+                guard let centerController = centerController else { return }
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                    centerController.view.frame.origin.x = centerController.view.frame.width - 80
+                }, completion: nil)
+            } else { //left
+                guard let centerController = centerController else { return }
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                    centerController.view.frame.origin.x = 0
+                }, completion: nil)
             }
-            animator.pauseAnimation()
             
-        case .changed:
-            animator.fractionComplete = gestureRecognizer.translation(in: view).x / view.bounds.size.width
+        } else if gestureRecognizer.state == .ended {
             
-        case .ended:
-            if animator.fractionComplete <= 0.2 {
-                animator.isReversed = true
-            }
-
-            animator.startAnimation()
-            
-        default:
-            ()
         }
+//        switch gestureRecognizer.state {
+//        case .began:
+//            guard let centerController = centerController else { return }
+//            animator = UIViewPropertyAnimator(duration: 0.4, timingParameters: UISpringTimingParameters(mass: 0.2, stiffness: 50.0, damping: 7.0, initialVelocity: .zero))
+//            animator.addAnimations {
+//                centerController.view.frame.origin.x = centerController.view.frame.width - 80
+//            }
+//            animator.pauseAnimation()
+//
+//        case .changed:
+//            animator.fractionComplete = gestureRecognizer.translation(in: view).x / view.bounds.size.width
+//
+//        case .ended:
+//            if animator.fractionComplete <= 0.2 {
+//                animator.isReversed = true
+//            }
+//
+//            animator.startAnimation()
+//
+//        default:
+//            ()
+//        }
     }
 
     func setCenterController(_ controller: UIViewController) {
