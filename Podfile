@@ -12,7 +12,6 @@ pod 'Firebase/Storage'
 pod 'Firebase/Analytics'
 pod 'Firebase/Database'
 pod 'Firebase/Core'
-pod 'SideMenu'
 
 end
 
