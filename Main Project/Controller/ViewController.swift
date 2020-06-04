@@ -44,22 +44,6 @@ class ViewController: UIViewController {
     //MARK: - Handlers
     
     @objc func swipeGesture(_ gestureRecognizer : UIPanGestureRecognizer) {
-//        if gestureRecognizer.state == .began {
-//            startedLocation = gestureRecognizer.location(in: view)
-//        }
-//
-//        if let startedLocation = startedLocation, gestureRecognizer.state == .ended {
-//            self.startedLocation = nil
-//            let location = gestureRecognizer.location(in: view)
-//            if startedLocation.y + 100 > location.y && startedLocation.y - 100 < location.y {
-//                if location.x - startedLocation.x > 100 {
-//                    self.openHambergerMenu()
-//                    self.view.endEditing(true)
-//                } else if startedLocation.x - location.x > 100 {
-//                    self.closeHumburgerMenu()
-//                }
-//            }
-//        }
         switch gestureRecognizer.state {
         case .began:
             guard let centerController = centerController else { return }
