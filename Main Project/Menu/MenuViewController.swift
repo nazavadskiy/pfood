@@ -170,21 +170,21 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 
-extension UIImageView {
-    func load(mainModel: MenuModel) {
-        if let image = mainModel.image { self.image = image; return }
-        
-        let urlText = mainModel.imageURL
-        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
-        
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    mainModel.image = image
-                    self?.image = mainModel.image
-                }
-            }
-        }
-    }
-}
+//extension UIImageView {
+//    func load(mainModel: MenuModel) {
+//        if let image = mainModel.image { self.image = image; return }
+//
+//        let urlText = mainModel.imageURL
+//        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
+//
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                guard let image = UIImage(data: data) else { return }
+//                DispatchQueue.main.async {
+//                    mainModel.image = image
+//                    self?.image = mainModel.image
+//                }
+//            }
+//        }
+//    }
+//}
