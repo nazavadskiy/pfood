@@ -262,12 +262,31 @@ class ShoppingCartViewController: UIViewController {
     func configureNaivationBar() {
         navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
-        
-        let leftButton = UIBarButtonItem(image: UIImage(named: "lines"), style: .plain, target: self, action: #selector(openHamburgerAction))
+        navigationController?.navigationBar.tintColor  = .white
+            
+        let leftButton = UIButton(type: .system)
+        leftButton.setImage(UIImage(named: "lines"), for: .normal)
+        leftButton.addTarget(self, action: #selector(openHamburgerAction), for: .touchUpInside)
         leftButton.tintColor = .white
+
+        let rightButton = UIButton(type: .system)
+        rightButton.setImage(UIImage(named: "Cart"), for: .normal)
+        rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
+        rightButton.tintColor = .white
+
+        let titleView = UILabel(frame: .zero)
+        titleView.text = "Корзина"
+        titleView.font = .boldSystemFont(ofSize: 20)
+        titleView.textColor = .white
+        titleView.textAlignment = .center
+
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.setLeftButton(leftButton)
+        navBar?.setRightButton(rightButton)
+        navBar?.setCenterView(titleView)
+            
+        navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
         
-        self.title = "Корзина"
-        self.navigationItem.leftBarButtonItem = leftButton
     }
 
     
@@ -277,12 +296,12 @@ class ShoppingCartViewController: UIViewController {
         barDelegate?.hamburgerButtonDidTap()
     }
     
-//    @objc func openShoppingCardAction() {
-//        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
-//            rootVC.hamburgerMenuController.delegate?.handleMenuToggle(forMenuOption: MenuOptionModel.ShoppingCard)
-//        }
-//        barDelegate?.shoppingCartButtonDidTap()
-//    }
+    @objc func openShoppingCardAction() {
+        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+            rootVC.hamburgerMenuController.delegate?.handleMenuToggle(forMenuOption: MenuOptionModel.ShoppingCard)
+        }
+        barDelegate?.shoppingCartButtonDidTap()
+    }
     
     var isKeyboardShown = false
 }

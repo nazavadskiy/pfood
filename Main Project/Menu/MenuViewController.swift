@@ -107,7 +107,6 @@ class MenuViewController: UIViewController {
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
         titleView.textAlignment = .center
-//        titleView.backgroundColor = .black
 //        let rec = UITapGestureRecognizer(target: self, action: #selector(openShoppingCardAction))
 
         let navBar = navigationController?.navigationBar as? MainNavigationBar
