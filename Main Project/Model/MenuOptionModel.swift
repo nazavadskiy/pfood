@@ -31,7 +31,7 @@ enum MenuOptionModel: Int, CustomStringConvertible {
         case .Menu: return "Folk and spoon"
         case .ShoppingCard: return "Cart"
         case .Ratings: return "Globe"
-        case .Orders: return "Basket"
+        case .Orders: return "Bag"
         }
     }
 }
