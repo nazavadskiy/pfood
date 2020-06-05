@@ -108,11 +108,13 @@ class MenuViewController: UIViewController {
         titleView.textColor = .white
         titleView.textAlignment = .center
 //        titleView.backgroundColor = .black
+//        let rec = UITapGestureRecognizer(target: self, action: #selector(openShoppingCardAction))
 
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)
         navBar?.setRightButton(rightButton)
         navBar?.setCenterView(titleView)
+//        navBar?.centerView.addGestureRecognizer(rec)
         
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
     }

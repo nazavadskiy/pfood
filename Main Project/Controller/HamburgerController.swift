@@ -36,7 +36,7 @@ class HamburgerController: UIViewController {
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
-                self.userViewInMenu.nameLabel.text = "Зарегестрируйтесь"
+                self.userViewInMenu.nameLabel.text = "Зарегистрируйтесь"
                 self.userViewInMenu.phoneNumberLabel.text = ""
             } else {
                 if let currentUser = user {

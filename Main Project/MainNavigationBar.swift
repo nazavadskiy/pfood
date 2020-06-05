@@ -77,7 +77,9 @@ class MainNavigationBar: UINavigationBar {
         centerView.subviews.forEach { $0.removeFromSuperview() }
         guard let view = view else { return }
         
+//        let recognizer = UITapGestureRecognizer()
         let imageView = UIImageView(image: UIImage(named: "shopicon"))
+//        imageView.addGestureRecognizer(recognizer)
         imageView.contentMode = .scaleAspectFit
         centerView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
