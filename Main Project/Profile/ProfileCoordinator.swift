@@ -12,12 +12,14 @@ class ProfileCoordinator: CoordinatorProtocol {
     
     let mainVC: UIViewController
     weak var hamburgerRouter: HamburgerRouterProtocol?
+//    var closed: Bool
     
     init() {
         let rootVC = ProfileController()
         let navigationController = UINavigationController(navigationBarClass: MainNavigationBar.self, toolbarClass: nil)
         navigationController.pushViewController(rootVC, animated: true)
         mainVC = navigationController
+
 
         rootVC.barDelegate = self
     }

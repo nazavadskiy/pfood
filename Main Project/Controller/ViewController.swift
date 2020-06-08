@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var hamburgerMenuController: HamburgerController!
     var centerController: UIViewController?
     
-    private var animator: UIViewPropertyAnimator!
+    var closed = true
     
     lazy var router: HamburgerRouter = {
         let router = HamburgerRouter()

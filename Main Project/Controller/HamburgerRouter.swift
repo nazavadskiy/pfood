@@ -79,25 +79,36 @@ extension HamburgerRouter: HamburgerMenuDelegate {
 }
 
 extension HamburgerRouter: HamburgerRouterProtocol {
+    
     func openHambergerMenu() {
-        controller?.openHambergerMenu()
+        if controller!.closed {
+            controller?.openHambergerMenu()
+        } else {
+            controller?.closeHumburgerMenu()
+        }
+        controller!.closed = !(controller!.closed)
     }
     
     func openProfile() {
         controller?.setCenterController(profileCoordinator.mainVC)
+        controller?.closed = true
     }
     func openMenu() {
         controller?.setCenterController(menuCoordinator.mainVC)
+        controller?.closed = true
     }
     func openShoppingCart() {
         controller?.openHambergerMenu()
         controller?.setCenterController(shoppingCartCoordinator.mainVC)
+        controller?.closed = true
     }
     func openRaiting() {
         controller?.setCenterController(raitingCoordinator.mainVC)
+        controller?.closed = true
     }
     
     func openOrders() {
         controller?.setCenterController(orderCoordinator.mainVC)
+        controller?.closed = true
     }
 }
