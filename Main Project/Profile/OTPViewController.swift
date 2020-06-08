@@ -40,13 +40,6 @@ class OTPViewController: UIViewController {
     let otpTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите код подтверждения"
-        if #available(iOS 13.0, *) {
-            textField.textColor = UIColor(named: "mainColor")
-            textField.backgroundColor = .systemFill
-        } else {
-            textField.textColor = .black
-            textField.backgroundColor = .white
-        }
         textField.textContentType = .telephoneNumber
         textField.keyboardType = .phonePad
         return textField
@@ -87,6 +80,13 @@ class OTPViewController: UIViewController {
         mainStack.addArrangedSubview(otpTextField)
         mainStack.addArrangedSubview(registerButton)
         otpTextField.setBottomBorder()
+        if #available(iOS 13.0, *) {
+            otpTextField.textColor = UIColor(named: "mainColor")
+            otpTextField.backgroundColor = .systemBackground
+        } else {
+            otpTextField.textColor = .black
+            otpTextField.backgroundColor = .white
+        }
         registerButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         setUpView()

@@ -102,11 +102,11 @@ class RaitingsViewController: UIViewController {
     
     func setUpButton() {
         joinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        joinButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 12).isActive = true
+//        joinButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 12).isActive = true
         joinButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         joinButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         joinButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
-        joinButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+//        joinButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
     
     @objc func openMyTeam() {
