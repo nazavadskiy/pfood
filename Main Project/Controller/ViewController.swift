@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     
     @objc func swipeGesture(_ gestureRecognizer : UIPanGestureRecognizer) {
         self.view.endEditing(true)
-        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+        if gestureRecognizer.state == .changed {
             
             let translation = gestureRecognizer.translation(in: self.view).x
             
@@ -60,9 +60,10 @@ class ViewController: UIViewController {
                 }, completion: nil)
             }
             
-        } else if gestureRecognizer.state == .ended {
+        } //else if gestureRecognizer.state == .ended {
             
-        }
+        //}
+
 //        switch gestureRecognizer.state {
 //        case .began:
 //            guard let centerController = centerController else { return }
