@@ -22,7 +22,7 @@ class RaitingsViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Моя команда", for: .normal)
-        button.addTarget(self, action: #selector(openMyTeam), for: .touchUpInside)
+        button.addTarget(self, action: #selector(openMyTeam(_ :)), for: .touchUpInside)
         button.backgroundColor = .orange
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
@@ -102,17 +102,25 @@ class RaitingsViewController: UIViewController {
     
     func setUpButton() {
         joinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        joinButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 12).isActive = true
         joinButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         joinButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         joinButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
-//        joinButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
     
-    @objc func openMyTeam() {
+    @objc func openMyTeam(_ sender: UIButton) {
         let vc = TeamViewController()
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
+//        sender.backgroundColor = .red
+        let value = sender.layer.opacity
+        sender.layer.opacity = 0.3
+        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+        animation.duration = 0.1
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        animation.fromValue = sender.layer.opacity
+        animation.toValue = sender.layer.opacity = value
+        sender.layer.add(animation, forKey: "tapped")
+        sender.layer.opacity = value
     }
     
     func configureNaivationBar() {
