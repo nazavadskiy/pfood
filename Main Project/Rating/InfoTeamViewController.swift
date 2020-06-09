@@ -149,7 +149,10 @@ class InfoTeamViewController: UIViewController {
         }
         setUpStack()
         setUpUI()
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = true
+        navigationController?.navigationBar.tintColor  = .white
     }
     
     func setUpStack() {

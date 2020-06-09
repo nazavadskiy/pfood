@@ -73,7 +73,10 @@ class OTPViewController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = true
+        navigationController?.navigationBar.tintColor  = .white
         hideKeyboardWhenTappedAround()
         view.addSubview(mainStack)
         mainStack.addArrangedSubview(titleLabel)

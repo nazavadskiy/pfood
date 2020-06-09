@@ -177,7 +177,10 @@ class TeamViewController: UIViewController {
             view.backgroundColor = .white
         }
         setUpStack()
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = true
+        navigationController?.navigationBar.tintColor  = .white
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(copyTap))
         inviteLabel.addGestureRecognizer(gesture)

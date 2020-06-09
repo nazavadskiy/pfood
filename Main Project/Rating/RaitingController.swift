@@ -115,7 +115,7 @@ class RaitingsViewController: UIViewController {
         let value = sender.layer.opacity
         sender.layer.opacity = 0.3
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        animation.duration = 0.1
+        animation.duration = 0.3
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.fromValue = sender.layer.opacity
         animation.toValue = sender.layer.opacity = value
