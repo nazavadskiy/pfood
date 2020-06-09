@@ -22,7 +22,8 @@ class UserInfoView: UIView {
         
     let firstLinePlaceholder: UILabel = {
         let label = UILabel()
-        label.text = "Ваше место в рейтинге:"
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.text = "Ваше место в рейтинге"
         return label
     }()
     

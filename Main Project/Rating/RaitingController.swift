@@ -148,6 +148,8 @@ class RaitingsViewController: UIViewController {
         navBar?.setRightButton(rightButton)
         navBar?.setCenterView(titleView)
         
+        navBar?.leftButton.isHidden = false
+        
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
     }
     

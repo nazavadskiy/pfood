@@ -113,6 +113,7 @@ class ProfileController: UIViewController {
         navBar?.setLeftButton(leftButton)
         navBar?.setRightButton(rightButton)
         navBar?.setCenterView(titleView)
+        navBar?.leftButton.isHidden = false
     }
     
     //MARK: - Handlers
@@ -148,6 +149,9 @@ class ProfileController: UIViewController {
                 self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
             }
         }
+        let ac = UIAlertController(title: "Сохранено!", message: "Ваше имя и адрес были обновлены.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
     func parsingInformation() {
