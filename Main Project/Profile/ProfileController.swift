@@ -45,6 +45,7 @@ class ProfileController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
+        configureNaivationBar()
         view.addSubview(stack)
         stack.addArrangedSubview(registrationView)
         setUpStack()
@@ -52,7 +53,9 @@ class ProfileController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        configureNaivationBar()
+
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = false
 
         stack.removeArrangedSubview(userInfo)
         userInfo.removeFromSuperview()

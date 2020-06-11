@@ -55,7 +55,7 @@ class ShoppingCartViewController: UIViewController {
         
         guard paymentTextField.text != "",  adressTextField.text != "",
             paymentTextField.text != nil, adressTextField.text != nil else {
-                let alert = UIAlertController(title: "Заказы", message: "Заполните, пожалуйста, поля адресса и способа оплаты!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Заказы", message: "Заполните адрес и выберите способ оплаты", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Вперед!", style: .default, handler:nil))
                 self.present(alert, animated: true, completion: nil)
                 return

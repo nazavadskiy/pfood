@@ -34,6 +34,7 @@ class RaitingsViewController: UIViewController {
         setUpTableView()
         view.addSubview(joinButton)
         setUpButton()
+        configureNaivationBar()
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
         } else {
@@ -44,7 +45,9 @@ class RaitingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         count(nil)
-        configureNaivationBar()
+        
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = false
     }
     
     func positionOf(id: String, _ complition: @escaping (TeamModel)->()){
@@ -148,7 +151,10 @@ class RaitingsViewController: UIViewController {
         navBar?.setRightButton(rightButton)
         navBar?.setCenterView(titleView)
         
+        navigationController?.navigationBar.tintColor  = .white
         navBar?.leftButton.isHidden = false
+//        let navBar = navigationController?.navigationBar as? MainNavigationBar
+//        navBar?.leftButton.isHidden = true
         
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
     }
