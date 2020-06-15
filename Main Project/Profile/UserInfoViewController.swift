@@ -26,7 +26,11 @@ class UserInfoViewController: UIViewController {
     let namePlaceholder: UILabel = {
         let label = UILabel()
         label.text = "Введите ваше имя:"
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.textColor = .black
+        }
         label.font = .boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -36,7 +40,11 @@ class UserInfoViewController: UIViewController {
     let adressPlaceholder: UILabel = {
         let label = UILabel()
         label.text = "Введите ваш адрес: "
-        label.textColor = .black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor(named: "mainColor")
+        } else {
+            label.textColor = .black
+        }
         label.font = .boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -63,6 +71,7 @@ class UserInfoViewController: UIViewController {
            button.backgroundColor = .orange
            button.titleLabel?.textColor = .white
            button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+           button.layer.cornerRadius = 12
            button.translatesAutoresizingMaskIntoConstraints = false
            button.heightAnchor.constraint(equalToConstant: 60).isActive = true
            return button
@@ -72,7 +81,6 @@ class UserInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         navigationItem.setHidesBackButton(true, animated: false)
         
         //settingUpUI
@@ -87,6 +95,16 @@ class UserInfoViewController: UIViewController {
         nameTextField.setBottomBorder()
         adressTextField.setBottomBorder()
         loginButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+            nameTextField.backgroundColor = .systemBackground
+            adressTextField.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+            nameTextField.backgroundColor = .white
+            adressTextField.backgroundColor = .white
+        }
     }
 
     func setStackConstraints() {

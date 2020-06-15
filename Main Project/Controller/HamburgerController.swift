@@ -43,8 +43,8 @@ class HamburgerController: UIViewController {
                     let userRef = self.ref.child("users").child(currentUser.uid)
                     userRef.observe(.value) { (snapshot) in
                         let value = snapshot.value as? NSDictionary
-                        let name = value?["name"] as? String ?? "Name"
-                        let adress = value?["address"] as? String ?? "Adress"
+                        let name = value?["name"] as? String ?? "Имя"
+                        let adress = value?["address"] as? String ?? "Адрес"
                         self.userViewInMenu.nameLabel.text = name
                         self.userViewInMenu.phoneNumberLabel.text = adress
                     }
