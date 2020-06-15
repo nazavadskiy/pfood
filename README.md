@@ -1,5 +1,5 @@
 # pfood
-Delivery service UI Reafactor by me.
+Delivery service with UI Reafactor by me.
 
 Name in Appstore - Да, Хочу!
 
