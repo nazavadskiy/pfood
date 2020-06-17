@@ -73,7 +73,7 @@ class OrdersViewController: UIViewController {
         titleView.text = "Заказ"
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
-        titleView.textAlignment = .left
+        titleView.textAlignment = .center
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.setLeftButton(leftButton)

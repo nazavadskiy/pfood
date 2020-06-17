@@ -84,6 +84,7 @@ class InfoTeamViewController: UIViewController {
         } else {
             label.backgroundColor = .white
         }
+        label.isHidden = true
         return label
     }()
     
@@ -95,6 +96,7 @@ class InfoTeamViewController: UIViewController {
         } else {
             label.backgroundColor = .white
             label.textColor = .black
+            label.isHidden = true
         }
         return label
     }()
@@ -149,7 +151,8 @@ class InfoTeamViewController: UIViewController {
         }
         setUpStack()
         setUpUI()
-//        navigationItem.setHidesBackButton(true, animated: false)
+        inviteCode()
+        
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = true
         navigationController?.navigationBar.tintColor  = .white
@@ -208,5 +211,16 @@ class InfoTeamViewController: UIViewController {
         inviteLabel.text = team?.invite
         print(titleName.text ?? "")
         print(team?.teamName ?? "")
+    }
+    
+    func inviteCode(){
+        let userId = UserDefaults.standard.string(forKey: "id")
+        for id in team!.teamMembers {
+            if id == userId {
+                referalCodeLabel.isHidden = false
+                inviteLabel.isHidden = false
+                break
+            }
+        }
     }
 }

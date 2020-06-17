@@ -62,13 +62,16 @@ class ProfileController: UIViewController {
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
-                self.registrationView.loginButton.setTitle("Войти", for: .normal)
+                self.registrationView.loginButton.setTitle("Зарегестрироваться / Войти", for: .normal)
                 self.registrationView.logOutButton.removeFromSuperview()
                 self.registrationView.loginButton.addTarget(self, action: #selector(self.openNewVC), for: .touchUpInside)
                 self.registrationView.adress.isEnabled = false
                 self.registrationView.name.isEnabled = false
-                self.registrationView.name.text = ""
-                self.registrationView.adress.text = ""
+                self.registrationView.name.isHidden = true
+                self.registrationView.adress.isHidden = true
+                self.stack.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -(self.view.frame.height/2 - 40)).isActive = true
+                self.stack.topAnchor.constraint(greaterThanOrEqualTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = false
+//                self.stack.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
             } else {
                 self.registrationView.loginButton.setTitle("Сохранить", for: .normal)
                 self.registrationView.name.isEnabled = true
@@ -78,6 +81,10 @@ class ProfileController: UIViewController {
                 self.registrationView.loginButton.addTarget(self, action: #selector(self.handleLoginButton), for: .touchUpInside)
                 self.registrationView.logOutButton.addTarget(self, action: #selector(self.logOut), for: .touchUpInside)
                 self.parsingInformation()
+                self.registrationView.name.isHidden = false
+                self.registrationView.adress.isHidden = false
+                self.stack.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -(self.view.frame.height/2 - 40)).isActive = false
+                self.stack.topAnchor.constraint(greaterThanOrEqualTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
             }
         }
     }
@@ -87,7 +94,7 @@ class ProfileController: UIViewController {
     func setUpStack() {
         stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+//        stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
     }
     
     
