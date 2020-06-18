@@ -145,6 +145,35 @@ class ProfileController: UIViewController {
     @objc func openNewVC() {
         let vc = TelephoneNumberViewController()
         navigationController?.pushViewController(vc, animated: true)
+        
+        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+//                    rootVC.hamburgerMenuController.menuCount = 5
+//                    rootVC.hamburgerMenuController.viewDidLoad()
+//                    rootVC.hamburgerMenuController.tableView.reloadData()
+                    self.ref.child("courier_ids").observe(.value) { (snapshot) in
+                        for nextId in snapshot.value as? NSArray ?? [] {
+                            guard let nextId = nextId as? String else { continue }
+                            if nextId == rootVC.hamburgerMenuController.userId {
+                                rootVC.hamburgerMenuController.menuCount = 5
+                                rootVC.hamburgerMenuController.tableView.reloadData()
+                                break
+                            }
+                        }
+                    }
+
+                    self.ref.child("chef_ids").observe(.value) { (snapshot) in
+                        for nextId in snapshot.value as? NSArray ?? [] {
+                            guard let nextId = nextId as? String else { continue }
+                            if nextId == rootVC.hamburgerMenuController.userId {
+                                rootVC.hamburgerMenuController.menuCount = 5
+                                rootVC.hamburgerMenuController.tableView.reloadData()
+                                break
+                            }
+                        }
+                    }
+                    rootVC.hamburgerMenuController.menuCount = 4
+                    rootVC.hamburgerMenuController.tableView.reloadData()
+                }
     }
     
     @objc func handleLoginButton() {
@@ -199,6 +228,11 @@ class ProfileController: UIViewController {
             try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
+        }
+        
+        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+            rootVC.hamburgerMenuController.menuCount = 4
+            rootVC.hamburgerMenuController.tableView.reloadData()
         }
     }
 }

@@ -55,8 +55,12 @@ class OrderChangeItem: UIView {
     
     let plusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(named: "plus"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.imageView?.tintColor = UIColor(named: "mainColor")
+        } else {
+            button.imageView?.tintColor = .black
+        }
         button.backgroundColor = .gray
         button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         return button
@@ -64,8 +68,12 @@ class OrderChangeItem: UIView {
     
     let minusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("-", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(named: "minus"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.imageView?.tintColor = UIColor(named: "mainColor")
+        } else {
+            button.imageView?.tintColor = .black
+        }
         button.backgroundColor = .gray
         button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         return button

@@ -117,7 +117,9 @@ class ChangeOrderViewController: UIViewController {
         mainStackView.addArrangedSubview(saveButton)
         scrollView.contentSize = mainStackView.bounds.size
         
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {

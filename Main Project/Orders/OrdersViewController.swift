@@ -29,7 +29,6 @@ class OrdersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureNaivationBar()
         
         NetworkManager().getInfoOrder { (orders, error) in
             self.orders = orders ?? []
@@ -48,6 +47,9 @@ class OrdersViewController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
+        
+        configureNaivationBar()
+        
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -58,6 +60,7 @@ class OrdersViewController: UIViewController {
     func configureNaivationBar() {
         navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor  = .white
         
         let leftButton = UIButton(type: .system)
         leftButton.setImage(UIImage(named: "lines"), for: .normal)
@@ -81,6 +84,7 @@ class OrdersViewController: UIViewController {
         navBar?.setCenterView(titleView)
         
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
+        navBar?.leftButton.isHidden = false
     }
     
     //MARK: - Handlers

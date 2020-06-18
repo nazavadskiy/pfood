@@ -297,7 +297,9 @@ class DetailOrderViewController: UIViewController {
         
         self.addAdminKeys()
         
-        navigationItem.setHidesBackButton(true, animated: false)
+//        navigationItem.setHidesBackButton(true, animated: false)
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = true
     }
 
     func addAdminKeys() {
