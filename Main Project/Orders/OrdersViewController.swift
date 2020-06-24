@@ -36,6 +36,9 @@ class OrdersViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        let navBar = navigationController?.navigationBar as? MainNavigationBar
+        navBar?.leftButton.isHidden = false
 
     }
     
@@ -84,7 +87,6 @@ class OrdersViewController: UIViewController {
         navBar?.setCenterView(titleView)
         
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
-        navBar?.leftButton.isHidden = false
     }
     
     //MARK: - Handlers
@@ -115,6 +117,12 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         infoOrderView.adressLabel.text = orders[indexPath.row].address
         infoOrderView.dataLabel.text = orders[indexPath.row].time
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
+//        if #available(iOS 13.0, *) {
+//            infoOrderView.moreButton.titleLabel?.textColor = UIColor(named: "mainColor")
+//        } else {
+//            infoOrderView.moreButton.titleLabel?.textColor = .black
+//        }
+        infoOrderView.moreButton.isHidden = true
         return infoOrderView
     }
     

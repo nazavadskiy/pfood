@@ -154,7 +154,7 @@ class DetailOrderViewController: UIViewController {
     lazy var saveChangesButton: UIButton = {
         let button = UIButton()
         button.setTitle("СОХР. ИЗМЕНЕНИЯ", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
@@ -166,7 +166,7 @@ class DetailOrderViewController: UIViewController {
     let changeOrderButton: UIButton = {
         let button = UIButton()
         button.setTitle("ИЗМЕНИТЬ ЗАКАЗ", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
         button.layer.cornerRadius = 5

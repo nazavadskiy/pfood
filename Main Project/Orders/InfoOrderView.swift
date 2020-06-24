@@ -58,7 +58,7 @@ class InfoOrderView: UITableViewCell {
     
     let moreButton: UIButton = {
        let button = UIButton()
-        button.setTitle("More", for: .normal)
+        button.setTitle("Подробнее", for: .normal)
         return button
     }()
     
