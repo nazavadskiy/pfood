@@ -93,11 +93,13 @@ class MenuViewController: UIViewController {
         navigationController?.navigationBar.tintColor  = .white
         
         let leftButton = UIButton(type: .system)
+        leftButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         leftButton.setImage(UIImage(named: "lines"), for: .normal)
         leftButton.addTarget(self, action: #selector(openHamburgerAction), for: .touchUpInside)
         leftButton.tintColor = .white
 
         let rightButton = UIButton(type: .system)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.setImage(UIImage(named: "Cart"), for: .normal)
         rightButton.addTarget(self, action: #selector(openShoppingCardAction), for: .touchUpInside)
         rightButton.tintColor = .white
