@@ -60,6 +60,7 @@ class ShoppingCartItem: UIView {
     
     let plusButton: UIButton = {
         let button = UIButton()
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         button.setImage(UIImage(named: "plus"), for: .normal)
         if #available(iOS 13.0, *) {
             button.imageView?.tintColor = UIColor(named: "mainColor")
@@ -72,6 +73,7 @@ class ShoppingCartItem: UIView {
     
     let minusButton: UIButton = {
         let button = UIButton()
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         button.setImage(UIImage(named: "minus"), for: .normal)
         if #available(iOS 13.0, *) {
             button.imageView?.tintColor = UIColor(named: "mainColor")

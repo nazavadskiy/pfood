@@ -48,13 +48,18 @@ class OrderChangeItem: UIView {
         let label = UILabel()
         label.text = "1"
         label.textAlignment = .center
-        label.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .systemBackground
+        } else {
+            label.backgroundColor = .white
+        }
         label.font = .systemFont(ofSize: 18)
         return label
     }()
     
     let plusButton: UIButton = {
         let button = UIButton()
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         button.setImage(UIImage(named: "plus"), for: .normal)
         if #available(iOS 13.0, *) {
             button.imageView?.tintColor = UIColor(named: "mainColor")
@@ -63,13 +68,13 @@ class OrderChangeItem: UIView {
             button.imageView?.tintColor = .black
             button.backgroundColor = .white
         }
-        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         return button
     }()
     
     let minusButton: UIButton = {
         let button = UIButton()
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         button.setImage(UIImage(named: "minus"), for: .normal)
         if #available(iOS 13.0, *) {
             button.imageView?.tintColor = UIColor(named: "mainColor")
@@ -78,7 +83,6 @@ class OrderChangeItem: UIView {
             button.imageView?.tintColor = .black
             button.backgroundColor = .white
         }
-        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
         return button
     }()

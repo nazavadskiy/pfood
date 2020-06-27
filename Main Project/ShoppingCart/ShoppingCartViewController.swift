@@ -82,7 +82,7 @@ class ShoppingCartViewController: UIViewController {
     
     let adressPlaceholder: UILabel = {
         let label = UILabel()
-        label.text = "Адрес доставки: "
+        label.text = "Адрес доставки: г. Иваново"
         label.font = .systemFont(ofSize: 20)
         return label
     }()
