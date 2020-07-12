@@ -32,6 +32,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.sizeToFit()
         button.titleLabel?.textAlignment = .center
+        button.titleLabel!.adjustsFontSizeToFitWidth = false
         if #available(iOS 13.0, *) {
             button.backgroundColor = .systemGray5
              button.setTitleColor(UIColor(named: "mainColor"), for: .normal)

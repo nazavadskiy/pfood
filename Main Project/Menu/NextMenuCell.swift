@@ -63,8 +63,9 @@ class NextMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "test"
         label.numberOfLines = 2
-        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = false
+        label.lineBreakMode = .byTruncatingTail
         if #available(iOS 13.0, *) {
             label.backgroundColor = .systemGray5
             label.textColor = UIColor(named: "mainColor")
