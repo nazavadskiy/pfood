@@ -65,6 +65,13 @@ class OTPViewController: UIViewController {
         return label
     }()
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
+        rootVC.hamburgerMenuController.menuCount = 5
+        rootVC.hamburgerMenuController.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

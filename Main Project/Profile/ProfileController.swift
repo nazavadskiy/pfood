@@ -52,7 +52,7 @@ class ProfileController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
 
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
@@ -149,9 +149,6 @@ class ProfileController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
         
         if let rootVC = UIApplication.shared.windows.first?.rootViewController as? ViewController {
-//                    rootVC.hamburgerMenuController.menuCount = 5
-//                    rootVC.hamburgerMenuController.viewDidLoad()
-//                    rootVC.hamburgerMenuController.tableView.reloadData()
                     self.ref.child("courier_ids").observe(.value) { (snapshot) in
                         for nextId in snapshot.value as? NSArray ?? [] {
                             guard let nextId = nextId as? String else { continue }
