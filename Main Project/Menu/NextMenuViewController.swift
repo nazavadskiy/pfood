@@ -24,6 +24,11 @@ class NextMenuViewController: UIViewController {
     
     //MARK: - Init
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let titleText = titleText else { return }
