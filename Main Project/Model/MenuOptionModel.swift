@@ -12,7 +12,7 @@ enum MenuOptionModel: Int, CustomStringConvertible {
     case Profile
     case Menu
     case ShoppingCard
-    case Ratings
+//    case Ratings //this must be uncommented if Ratings come back to app
     case Orders
     
     var description: String {
@@ -20,7 +20,7 @@ enum MenuOptionModel: Int, CustomStringConvertible {
         case .Profile: return "Профиль"
         case .Menu: return "Меню"
         case .ShoppingCard: return "Корзина"
-        case .Ratings: return "Рейтинг"
+//        case .Ratings: return "Рейтинг"
         case .Orders: return "Заказ"
         }
     }
@@ -30,7 +30,7 @@ enum MenuOptionModel: Int, CustomStringConvertible {
         case .Profile: return "User"
         case .Menu: return "Folk and spoon"
         case .ShoppingCard: return "Cart"
-        case .Ratings: return "Globe"
+//        case .Ratings: return "Globe"
         case .Orders: return "Bag"
         }
     }

@@ -110,7 +110,7 @@ class HamburgerController: UIViewController {
                     for nextId in snapshot.value as? NSArray ?? [] {
                         guard let nextId = nextId as? String else { continue }
                         if nextId == self.userId {
-                            self.menuCount = 5
+                            self.menuCount = 4 //5
                             self.tableView.reloadData()
                             break
                         }
@@ -121,24 +121,24 @@ class HamburgerController: UIViewController {
                     for nextId in snapshot.value as? NSArray ?? [] {
                         guard let nextId = nextId as? String else { continue }
                         if nextId == self.userId {
-                            self.menuCount = 5
+                            self.menuCount = 4 //5
                             self.tableView.reloadData()
                             break
                         }
                     }
                 }
-                self.menuCount = 4
+                self.menuCount = 3 //4
                 self.tableView.reloadData()
             }
         }
     }
-    var menuCount = 4
+    var menuCount = 3 //4
 }
 
 extension HamburgerController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return 5
-        guard let id = UserDefaults.standard.string(forKey: "id") else { return 4 }
+        guard let id = UserDefaults.standard.string(forKey: "id") else { return 3 } //4
         self.userId = id
         return menuCount
     }

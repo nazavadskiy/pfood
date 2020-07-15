@@ -57,8 +57,8 @@ class ProfileController: UIViewController {
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
 
-        stack.removeArrangedSubview(userInfo)
-        userInfo.removeFromSuperview()
+//        stack.removeArrangedSubview(userInfo)
+//        userInfo.removeFromSuperview()
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
@@ -182,9 +182,9 @@ class ProfileController: UIViewController {
         self.ref.child("users/\(id)/address").setValue(registrationView.adress.text ?? "")
         NetworkManager().getUserInfo(id: id) { (userInfo, _) in
             DispatchQueue.main.async {
-                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
-                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
-                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
+//                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
+//                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
+//                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
             }
         }
         let ac = UIAlertController(title: "Сохранено!", message: "Ваше имя и адрес были обновлены.", preferredStyle: .alert)
@@ -205,13 +205,13 @@ class ProfileController: UIViewController {
                 }
             }
         }
-        stack.insertArrangedSubview(userInfo, at: 0)
+//        stack.insertArrangedSubview(userInfo, at: 0)
         guard let id = UserDefaults.standard.string(forKey: "id") else { return }
         NetworkManager().getUserInfo(id: id) { (userInfo, _) in
             DispatchQueue.main.async {
-                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
-                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
-                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
+//                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
+//                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
+//                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
             }
         }
     }
@@ -220,7 +220,7 @@ class ProfileController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "id")
         UserDefaults.standard.removeObject(forKey: "teamID")
         UserDefaults.standard.removeObject(forKey: "phone")
-        stack.removeArrangedSubview(userInfo)
+//        stack.removeArrangedSubview(userInfo)
         userInfo.removeFromSuperview()
         let firebaseAuth = Auth.auth()
         do {

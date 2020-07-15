@@ -64,8 +64,8 @@ extension HamburgerRouter: HamburgerMenuDelegate {
                 self.openMenu()
             case .ShoppingCard:
                 self.openShoppingCart()
-            case .Ratings:
-                self.openRaiting()
+//            case .Ratings:
+//                self.openRaiting()
             case .Orders:
                 self.openOrders()
             }
