@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class OrdersViewController: UIViewController {
     weak var barDelegate: RaitingsControllerDelegate?
@@ -30,6 +31,7 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+//        let order = ref.child("orders")
         NetworkManager().getInfoOrder { (orders, error) in
             self.orders = orders ?? []
             DispatchQueue.main.async {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 private let reusableIdentifier = "myEatingCell"
 
@@ -105,17 +106,13 @@ extension NextMenuViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! NextMenuCell
         cell.item = nextMenuModelArray[indexPath.row]
         let urlText = nextMenuModelArray[indexPath.row].imageURL
-        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return MenuCollectionViewCell()}
-        
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url) {
-                guard UIImage(data: data) != nil else { return }
-                DispatchQueue.main.async {
-                    cell.itemImageView.kf.indicatorType = .activity
-                    cell.itemImageView.kf.setImage(with: url)
-                }
-            }
-        }
+        let ref = Storage.storage().reference(forURL: urlText)
+        let megabyte = Int64(1 * 1024 * 1024)
+        ref.getData(maxSize: megabyte, completion: { (data, error) in
+            guard let imageData = data else { return }
+            let image = UIImage(data: imageData)
+            cell.itemImageView.image = image
+        })
         return cell
     }
     
@@ -148,42 +145,44 @@ extension NextMenuViewController: UICollectionViewDelegate, UICollectionViewData
 
 }
 
-extension UIImageView {
-    func load(urlText: String) {
-        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async { [weak self] in
-                    self?.image = image
-                }
-            }
-        }
-    }
-    
-    func load(model: NextMenuModel) {
-        if let image = model.image { self.image = image; return }
-        
-        let urlText = model.imageURL
-        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
-        
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    if model.sale {
-                        model.image = image.addSale()
-                    } else {
-                        model.image = image
-                    }
-                    self?.image = model.image
-                    
-                    
-                }
-            }
-        }
-    }
-}
+//MARK: - Extensions
+
+//extension UIImageView {
+//    func load(urlText: String) {
+//        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                guard let image = UIImage(data: data) else { return }
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.image = image
+//                }
+//            }
+//        }
+//    }
+//    
+//    func load(model: NextMenuModel) {
+//        if let image = model.image { self.image = image; return }
+//        
+//        let urlText = model.imageURL
+//        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
+//        
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                guard let image = UIImage(data: data) else { return }
+//                DispatchQueue.main.async {
+//                    if model.sale {
+//                        model.image = image.addSale()
+//                    } else {
+//                        model.image = image
+//                    }
+//                    self?.image = model.image
+//                    
+//                    
+//                }
+//            }
+//        }
+//    }
+//}
 
 extension UIImage {
     

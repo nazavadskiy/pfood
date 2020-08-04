@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import Kingfisher
+import FirebaseStorage
 
 private let reusableIdentifier = "myCell"
 
@@ -16,6 +16,7 @@ class MenuViewController: UIViewController {
     
     var ref: DatabaseReference = Database.database().reference()
     var modelArray: [MenuModel] = []
+    
     //MARK: - Properties
     weak  var barDelegate: MenuControllerDelegate?
     
@@ -146,17 +147,13 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.itemButton.setTitle(String(modelArray[indexPath.row].name), for: .normal)
         
         let urlText = modelArray[indexPath.row].imageURL
-        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return MenuCollectionViewCell()}
-        
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url) {
-                guard UIImage(data: data) != nil else { return }
-                DispatchQueue.main.async {
-                    cell.itemImageView.kf.indicatorType = .activity
-                    cell.itemImageView.kf.setImage(with: url)
-                }
-            }
-        }
+        let ref = Storage.storage().reference(forURL: String(urlText))
+        let megabyte = Int64(1 * 1024 * 1024)
+        ref.getData(maxSize: megabyte, completion: { data, error in
+            guard let imageData = data else { return }
+            let image = UIImage(data: imageData)
+            cell.itemImageView.image = image
+        })
         
         
         return cell
@@ -169,23 +166,3 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
         self.navigationController?.pushViewController(nexMenuVC, animated: true)
     }
 }
-
-
-//extension UIImageView {
-//    func load(mainModel: MenuModel) {
-//        if let image = mainModel.image { self.image = image; return }
-//
-//        let urlText = mainModel.imageURL
-//        guard let url = URL(string: urlText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) else { return }
-//
-//        DispatchQueue.global().async { [weak self] in
-//            if let data = try? Data(contentsOf: url) {
-//                guard let image = UIImage(data: data) else { return }
-//                DispatchQueue.main.async {
-//                    mainModel.image = image
-//                    self?.image = mainModel.image
-//                }
-//            }
-//        }
-//    }
-//}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class DetailItemViewController: UIViewController {
     var count = 0 {
@@ -213,7 +214,15 @@ class DetailItemViewController: UIViewController {
     
     func setUpUI() {
         guard let item = item else { return }
-        mainImage.load(model: item)
+        
+        let ref = Storage.storage().reference(forURL: item.imageURL)
+        let megabyte = Int64(1 * 1024 * 1024)
+        ref.getData(maxSize: megabyte, completion: { (data, error) in
+            guard let imageData = data else { return }
+            let image = UIImage(data: imageData)
+            self.mainImage.image = image
+        })
+        
         nameTitle.text = item.name
         price.text = String(item.price) + "₽"
         descriptionLabel.text = item.description

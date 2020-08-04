@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ShoppingCartItem: UIView {
     
@@ -23,7 +24,14 @@ class ShoppingCartItem: UIView {
     var item: NextMenuModel? {
         didSet {
             guard let newValue = self.item else { return }
-            imageView.load(model: newValue)
+//            imageView.load(model: newValue)
+            let ref = Storage.storage().reference(forURL: newValue.imageURL)
+            let megabyte = Int64(1 * 1024 * 1024)
+            ref.getData(maxSize: megabyte, completion: { (data, error) in
+                guard let imageData = data else { return }
+                let image = UIImage(data: imageData)
+                self.imageView.image = image
+            })
             titleLabel.text = newValue.name
             count = ShoppingCart.shared.items[newValue] ?? 0
         }
