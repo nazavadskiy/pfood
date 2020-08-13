@@ -12,11 +12,14 @@ import Firebase
 class OrdersViewController: UIViewController {
     weak var barDelegate: RaitingsControllerDelegate?
     
+    let ref = Database.database().reference()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(InfoOrderView.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+        
         if #available(iOS 13.0, *) {
             tableView.backgroundColor = .systemBackground
         } else {
@@ -31,11 +34,31 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let order = ref.child("orders")
-        NetworkManager().getInfoOrder { (orders, error) in
-            self.orders = orders ?? []
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+//        NetworkManager().getInfoOrder { (orders, error) in
+//            self.orders = orders ?? []
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+        let orders = ref.child("orders")
+        orders.observe(.value) { (snapshot) in
+            for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
+                let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
+                let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
+                let completeTime = (pOrder.value as? NSDictionary)?["complete_time"] as? String ?? ""
+                let orderP = (pOrder.value as? NSDictionary)?["order_p"] as? String ?? ""
+                let paymentType = (pOrder.value as? NSDictionary)?["payment_type"] as? String ?? ""
+                let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
+                let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
+                let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""
+                let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
+                
+                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status)
+                self.orders.append(orderPeace)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
         

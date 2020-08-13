@@ -17,6 +17,9 @@ class ShoppingCartViewController: UIViewController {
     
     let methods = ["Картой", "Наличными"]
     
+    var ref: DatabaseReference = Database.database().reference()
+
+    
     let mainStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +72,7 @@ class ShoppingCartViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        
     }
     
     let adressStackView: UIStackView = {
@@ -133,8 +137,6 @@ class ShoppingCartViewController: UIViewController {
         } else {
             textField.layer.borderColor = UIColor.gray.cgColor
         }
-//        textField.layer.borderWidth = 2
-//        textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
         textField.borderStyle = .roundedRect
         textField.heightAnchor.constraint(equalToConstant: 30).isActive = true

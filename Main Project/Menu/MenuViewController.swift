@@ -147,14 +147,13 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.itemButton.setTitle(String(modelArray[indexPath.row].name), for: .normal)
         
         let urlText = modelArray[indexPath.row].imageURL
-        let ref = Storage.storage().reference(forURL: String(urlText))
+        let ref = Storage.storage().reference(forURL: urlText)
         let megabyte = Int64(1 * 1024 * 1024)
-        ref.getData(maxSize: megabyte, completion: { data, error in
+        ref.getData(maxSize: megabyte) { data, error in
             guard let imageData = data else { return }
             let image = UIImage(data: imageData)
-            cell.itemImageView.image = image
-        })
-        
+            cell.itemImageView.image = image!
+        }
         
         return cell
     }

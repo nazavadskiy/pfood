@@ -105,14 +105,15 @@ extension NextMenuViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! NextMenuCell
         cell.item = nextMenuModelArray[indexPath.row]
+        
         let urlText = nextMenuModelArray[indexPath.row].imageURL
         let ref = Storage.storage().reference(forURL: urlText)
         let megabyte = Int64(1 * 1024 * 1024)
-        ref.getData(maxSize: megabyte, completion: { (data, error) in
+        ref.getData(maxSize: megabyte) { data, error in
             guard let imageData = data else { return }
             let image = UIImage(data: imageData)
-            cell.itemImageView.image = image
-        })
+            cell.itemImageView.image = image!
+        }
         return cell
     }
     
