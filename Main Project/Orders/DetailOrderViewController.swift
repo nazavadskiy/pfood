@@ -33,7 +33,6 @@ class DetailOrderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.text = "Name"
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 28)
         return label
     }()
@@ -43,7 +42,6 @@ class DetailOrderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.text = "+7xxxxxxxxxx"
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 28)
         return label
     }()
@@ -53,8 +51,22 @@ class DetailOrderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.text = "Время заказа: хх-хх-хх"
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 20)
+        return label
+    }()
+    
+    let status: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        label.text = "Получен"
+        label.font = .boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8.0
+        label.textColor = .white
+        label.backgroundColor = .darkGray
         return label
     }()
     
@@ -63,7 +75,6 @@ class DetailOrderViewController: UIViewController {
         label.text = "Цена заказа: хххх₽"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 20)
         return label
     }()
@@ -73,8 +84,7 @@ class DetailOrderViewController: UIViewController {
         label.text = "Заказ: "
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -83,8 +93,7 @@ class DetailOrderViewController: UIViewController {
         label.text = "Адрес: "
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -93,7 +102,6 @@ class DetailOrderViewController: UIViewController {
         label.text = "Адрес1"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -103,8 +111,7 @@ class DetailOrderViewController: UIViewController {
         label.text = "Тип оплаты: "
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -113,7 +120,6 @@ class DetailOrderViewController: UIViewController {
         label.text = "Оплата1"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -123,7 +129,6 @@ class DetailOrderViewController: UIViewController {
         label.text = "Комментарий к заказу: "
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.textColor = .lightGray
         label.font = .systemFont(ofSize: 20)
         return label
     }()
@@ -131,7 +136,7 @@ class DetailOrderViewController: UIViewController {
     let commentaryTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .systemFont(ofSize: 18)
+        textField.font = .boldSystemFont(ofSize: 18)
         textField.layer.borderColor = UIColor.systemGray.cgColor
         textField.layer.borderWidth = 2
         textField.layer.cornerRadius = 12
@@ -282,6 +287,7 @@ class DetailOrderViewController: UIViewController {
         stack.addArrangedSubview(name)
         stack.addArrangedSubview(phone)
         stack.addArrangedSubview(orderTime)
+        stack.addArrangedSubview(status)
         stack.addArrangedSubview(price)
         stack.addArrangedSubview(orderPlaceholder)
         stack.addArrangedSubview(orderView)

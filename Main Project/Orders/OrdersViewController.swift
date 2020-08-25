@@ -34,12 +34,6 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        NetworkManager().getInfoOrder { (orders, error) in
-//            self.orders = orders ?? []
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
         let orders = ref.child("orders")
         orders.observe(.value) { (snapshot) in
             for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
@@ -144,11 +138,6 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         infoOrderView.adressLabel.text = orders[indexPath.row].address
         infoOrderView.dataLabel.text = orders[indexPath.row].time
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
-//        if #available(iOS 13.0, *) {
-//            infoOrderView.moreButton.titleLabel?.textColor = UIColor(named: "mainColor")
-//        } else {
-//            infoOrderView.moreButton.titleLabel?.textColor = .black
-//        }
         infoOrderView.moreButton.isHidden = true
         return infoOrderView
     }

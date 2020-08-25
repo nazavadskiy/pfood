@@ -56,6 +56,19 @@ class InfoOrderView: UITableViewCell {
         return label
     }()
     
+    let statusLabel: UILabel = {
+        let label = UILabel()
+        label.widthAnchor.constraint(equalToConstant: 120).isActive = true //make depending on view
+        label.font = .boldSystemFont(ofSize: 20)
+        label.backgroundColor = .darkGray
+        label.text = "Получен"
+        label.textAlignment = .center
+        label.textColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8.0
+        return label
+    }()
+    
     let moreButton: UIButton = {
        let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
@@ -90,7 +103,7 @@ class InfoOrderView: UITableViewCell {
         userAndDataStack.addArrangedSubview(dataLabel)
         stack.addArrangedSubview(phoneNumberLabel)
         stack.addArrangedSubview(adressLabel)
-        stack.addArrangedSubview(moreButton)
+        stack.addArrangedSubview(statusLabel)
         stack.addArrangedSubview(seperator)
         setUpStackConstraints()
 
