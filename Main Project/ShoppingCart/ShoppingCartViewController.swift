@@ -18,7 +18,8 @@ class ShoppingCartViewController: UIViewController {
     let methods = ["Картой", "Наличными"]
     
     var ref: DatabaseReference = Database.database().reference()
-
+    
+    lazy var payment = "Наличными"
     
     let mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -65,13 +66,13 @@ class ShoppingCartViewController: UIViewController {
         }
         
         ShoppingCart.shared.sendOrder(paymentType: paymentTextField.text ?? "",
-                                      adressZakaz: adressTextField.text ?? "") { text in
-            DispatchQueue.main.async {
-                let alert = UIAlertController(title: "Заказ", message: text, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+                                      adressZakaz: adressTextField.text ?? "")
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Заказ", message: "Заказ принят!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
+        
         
     }
     
@@ -366,6 +367,7 @@ extension ShoppingCartViewController: UIPickerViewDataSource, UIPickerViewDelega
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         paymentTextField.text = methods[row]
         paymentTextField.resignFirstResponder()
+        payment = methods[row]
     }
     
 }

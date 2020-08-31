@@ -11,8 +11,13 @@ import Firebase
 
 class OrdersViewController: UIViewController {
     weak var barDelegate: RaitingsControllerDelegate?
-    
+    private var refreshControl = UIRefreshControl()
     let ref = Database.database().reference()
+    
+    @objc func refreshData(_ sender: Any) {
+        orders.removeAll()
+        getData()
+    }
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -34,29 +39,6 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //MARK: - network protocol
-        let orders = ref.child("orders")
-        orders.observe(.value) { (snapshot) in
-            for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
-                let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
-                let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
-                let completeTime = (pOrder.value as? NSDictionary)?["complete_time"] as? String ?? ""
-                let orderP = (pOrder.value as? NSDictionary)?["order_p"] as? String ?? ""
-                let paymentType = (pOrder.value as? NSDictionary)?["payment_type"] as? String ?? ""
-                let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
-                let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
-                let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""
-                let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
-                
-                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status)
-                self.orders.append(orderPeace)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
 
@@ -72,15 +54,25 @@ class OrdersViewController: UIViewController {
         }
         
         configureNaivationBar()
-        
+        configureTableView()
+        getData()
+    }
+    
+    //MARK: - UI
+    fileprivate func configureTableView() {
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        getData()
+        
     }
     
-    func configureNaivationBar() {
+    fileprivate func configureNaivationBar() {
         navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor  = .white
@@ -110,7 +102,7 @@ class OrdersViewController: UIViewController {
         
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
     }
-    
+
     fileprivate func configureStatusLablel(_ strInfo: String) -> UIColor? {
         switch strInfo {
         case "Получен":
@@ -125,6 +117,33 @@ class OrdersViewController: UIViewController {
             return nil
         }
     }
+    
+    //MARK: - network protocol
+    fileprivate func getData() {
+        let orders = ref.child("orders")
+        orders.observe(.value) { (snapshot) in
+            for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
+                let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
+                let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
+                let completeTime = (pOrder.value as? NSDictionary)?["complete_time"] as? String ?? ""
+                let orderP = (pOrder.value as? NSDictionary)?["order_p"] as? String ?? ""
+                let paymentType = (pOrder.value as? NSDictionary)?["payment_type"] as? String ?? ""
+                let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
+                let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
+                let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""
+                let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
+                
+                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status)
+                self.orders.insert(orderPeace, at: 0)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
+                }
+            }
+        }
+    }
+    
     
     //MARK: - Handlers
         

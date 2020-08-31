@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import Firebase
 import CoreData
 
 class ShoppingCart {
@@ -25,6 +26,7 @@ class ShoppingCart {
     }
     
     var userRef = Database.database().reference().child("users")
+    var orderRef = Database.database().reference().child("orders")
     
     static let shared = ShoppingCart()
     
@@ -89,7 +91,7 @@ class ShoppingCart {
     }
     
     
-    @objc public func sendOrder(paymentType: String, adressZakaz: String, complition: @escaping (_ text: String)->()) {
+    @objc public func sendOrder(paymentType: String, adressZakaz: String) {
         var order = ""
         var i = 0
         for (item, count) in items {
@@ -97,8 +99,6 @@ class ShoppingCart {
             if count == 0 { continue }
             order += item.name + " " + String(count) + "шт. | "
         }
-        if order == "" { complition("Выберите что-то в меню"); return }
-        order.removeLast(3)
         
         guard let id = UserDefaults.standard.string(forKey: "id") else { return }
         userRef.child(id).observe(.value) { (snapshot) in
@@ -123,14 +123,20 @@ class ShoppingCart {
                                      status: "0")
             self.saveOrder(with: order)
             
-            NetworkManager().addOrder(order: order) { (response, _) in
-                if response?.success == 1 {
-                    complition("Ваш заказ успешно отправлен!");
-                    self.currentOrder = order
-                } else {
-                    complition("Ошибка запроса, попробуйте позже");
-                }
-            }
+            let orderToSend: [String: Any] = [
+                "address" : order.address,
+                "comment" : order.comment ?? "",
+                "complete_time" : order.completeTime,
+                "name" : order.name,
+                "order_p" : order.orderP,
+                "payment_type" : order.paymentType,
+                "phone" : order.phone,
+                "price" : order.price,
+                "status" : "Получен",
+                "time" : order.time
+            ]
+            
+            self.orderRef.child("orders_\(Int.random(in: 0...10000))").setValue(orderToSend)
         }
     }
     
