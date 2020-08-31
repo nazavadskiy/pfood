@@ -17,13 +17,13 @@ class InfoOrderView: UITableViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.distribution = .fillProportionally
-        stack.spacing = 5
+        stack.spacing = 8
         return stack
     }()
     
     let userNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
+        label.font = .boldSystemFont(ofSize: 25)
         label.text = "test"
         return label
     }()
@@ -51,21 +51,19 @@ class InfoOrderView: UITableViewCell {
     
     let adressLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 14)
         label.text = "test"
         return label
     }()
     
     let statusLabel: UILabel = {
         let label = UILabel()
-        label.widthAnchor.constraint(equalToConstant: 120).isActive = true //make depending on view
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.font = .boldSystemFont(ofSize: 20)
-        label.backgroundColor = .darkGray
         label.text = "Получен"
         label.textAlignment = .center
-        label.textColor = .white
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 8.0
+        label.textColor = .none
         return label
     }()
     
@@ -78,12 +76,12 @@ class InfoOrderView: UITableViewCell {
     let seperator: UIView = {
         let view = UIView()
         if #available(iOS 13.0, *) {
-            view.backgroundColor = UIColor(named: "mainColor")
+            view.backgroundColor = .systemGray5
         } else {
-            view.backgroundColor = .black
+            view.backgroundColor = .gray
         }
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1.5).isActive = true
        return view
     }()
 

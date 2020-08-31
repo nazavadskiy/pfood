@@ -240,6 +240,21 @@ class DetailOrderViewController: UIViewController {
         stack.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor).isActive = true
     }
     
+    fileprivate func configureStatusLablel(_ strInfo: String) -> UIColor? {
+        switch strInfo {
+        case "Получен":
+            return .gray
+        case "Отказан":
+            return .red
+        case "Выполнен":
+            return .green
+        case "В работе":
+            return .orange
+        default:
+            return nil
+        }
+    }
+    
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,7 +290,6 @@ class DetailOrderViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
-        
         name.text = order?.name
         phone.text = order?.phone
         orderTime.text = order?.time
@@ -283,6 +297,8 @@ class DetailOrderViewController: UIViewController {
         userAdress.text = order?.address
         userPayment.text = order?.paymentType
         commentaryTextField.text = order?.comment
+        status.backgroundColor = configureStatusLablel(order?.status ?? "Получен")
+        status.text = order?.status ?? "Получен"
         
         stack.addArrangedSubview(name)
         stack.addArrangedSubview(phone)

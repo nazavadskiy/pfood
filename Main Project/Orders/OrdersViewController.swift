@@ -34,6 +34,7 @@ class OrdersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //MARK: - network protocol
         let orders = ref.child("orders")
         orders.observe(.value) { (snapshot) in
             for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
@@ -110,6 +111,21 @@ class OrdersViewController: UIViewController {
         navBar?.sumLabel.text = String(ShoppingCart.shared.getSum())
     }
     
+    fileprivate func configureStatusLablel(_ strInfo: String) -> UIColor? {
+        switch strInfo {
+        case "Получен":
+            return .gray
+        case "Отказан":
+            return .red
+        case "Выполнен":
+            return .green
+        case "В работе":
+            return .orange
+        default:
+            return nil
+        }
+    }
+    
     //MARK: - Handlers
         
     @objc func openHamburgerAction() {
@@ -138,7 +154,10 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         infoOrderView.adressLabel.text = orders[indexPath.row].address
         infoOrderView.dataLabel.text = orders[indexPath.row].time
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
+        infoOrderView.statusLabel.textColor = configureStatusLablel(orders[indexPath.row].status)
+        infoOrderView.statusLabel.text = orders[indexPath.row].status
         infoOrderView.moreButton.isHidden = true
+        
         return infoOrderView
     }
     
