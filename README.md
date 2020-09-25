@@ -1,5 +1,5 @@
 # pfood
-Delivery service with UI Reafactor by me. This project will be updated regullary. 
+Delivery service with UI Reafactor by me. This project will be updated regullary. Also rebase to Firebase by me! Actual build is here.
 
 Name in Appstore - Да, Хочу!
 
