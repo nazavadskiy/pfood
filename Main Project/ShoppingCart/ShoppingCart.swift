@@ -120,7 +120,8 @@ class ShoppingCart {
                                      paymentType: paymentType,
                                      orderP: order,
                                      completeTime: close,
-                                     status: "0")
+                                     status: "0", id: "")
+           
             self.saveOrder(with: order)
             
             let orderToSend: [String: Any] = [
@@ -182,7 +183,7 @@ class ShoppingCart {
                                      paymentType: result.first?.paymentType  ?? "",
                                      orderP: result.first?.order  ?? "",
                                      completeTime: result.first?.completeTime  ?? "",
-                                     status: result.first?.status  ?? "")
+                                     status: result.first?.status  ?? "", id: "")
             return order
         } catch let error as NSError{
             print(error.localizedDescription)

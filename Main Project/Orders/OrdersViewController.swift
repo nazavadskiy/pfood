@@ -132,8 +132,9 @@ class OrdersViewController: UIViewController {
                 let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
                 let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""
                 let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
+                let id = pOrder.key
                 
-                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status)
+                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status, id: id)
                 self.orders.insert(orderPeace, at: 0)
                 
                 DispatchQueue.main.async {
@@ -182,6 +183,7 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailOrderViewController()
+        vc.id = orders[indexPath.row].id
         vc.order = orders[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
 

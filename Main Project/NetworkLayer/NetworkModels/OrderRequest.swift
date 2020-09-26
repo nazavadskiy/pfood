@@ -22,7 +22,7 @@ public class OrderRequest: Decodable {
     var comment: String?
     
     
-    init(name: String, address: String, phone: String, price: String, time: String, paymentType: String, orderP: String, completeTime: String, status: String) {
+    init(name: String, address: String, phone: String, price: String, time: String, paymentType: String, orderP: String, completeTime: String, status: String, id: String) {
         self.name = name
         self.address = address
         self.phone = phone
@@ -32,6 +32,7 @@ public class OrderRequest: Decodable {
         self.orderP = orderP
         self.completeTime = completeTime
         self.status = status
+        self.id = id
     }
     
     func createDictionary() -> Dictionary<String, String>{

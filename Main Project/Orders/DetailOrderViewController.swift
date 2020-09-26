@@ -11,13 +11,14 @@ import Firebase
 
 class DetailOrderViewController: UIViewController {
     
-    var order: OrderRequest?
+    
     
     //MARK: - Properties
     var scrollView: UIScrollView!
     var ref = Database.database().reference()
-    
+    var order: OrderRequest?
     weak var barDelegate: ShoppingCartCoordinator?
+    var id : String? = nil
     
     let stack: UIStackView = {
         let stack = UIStackView()
@@ -290,6 +291,10 @@ class DetailOrderViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
+        let orderRef = ref.child(id ?? "")
+//        orderRef.observe(.value, andPreviousSiblingKeyWith: { snappshot})
+        //MARK: - here last
+        
         name.text = order?.name
         phone.text = order?.phone
         orderTime.text = order?.time
