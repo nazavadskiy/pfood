@@ -38,6 +38,7 @@ class OrdersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getData()
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
@@ -125,9 +126,9 @@ class OrdersViewController: UIViewController {
             for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
                 let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
                 let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
-                let completeTime = (pOrder.value as? NSDictionary)?["complete_time"] as? String ?? ""
-                let orderP = (pOrder.value as? NSDictionary)?["order_p"] as? String ?? ""
-                let paymentType = (pOrder.value as? NSDictionary)?["payment_type"] as? String ?? ""
+                let completeTime = (pOrder.value as? NSDictionary)?["completeTime"] as? String ?? ""
+                let orderP = (pOrder.value as? NSDictionary)?["orderP"] as? String ?? ""
+                let paymentType = (pOrder.value as? NSDictionary)?["paymentType"] as? String ?? ""
                 let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
                 let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
                 let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""

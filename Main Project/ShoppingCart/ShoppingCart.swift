@@ -127,10 +127,10 @@ class ShoppingCart {
             let orderToSend: [String: Any] = [
                 "address" : order.address,
                 "comment" : order.comment ?? "",
-                "complete_time" : order.completeTime,
+                "completeTime" : order.completeTime,
                 "name" : order.name,
-                "order_p" : order.orderP,
-                "payment_type" : order.paymentType,
+                "orderP" : order.orderP,
+                "paymentType" : order.paymentType,
                 "phone" : order.phone,
                 "price" : order.price,
                 "status" : "Получен",
