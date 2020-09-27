@@ -90,6 +90,7 @@ class ShoppingCart {
         return deliveryCost
     }
     
+    //MARK: - sending order
     
     @objc public func sendOrder(paymentType: String, adressZakaz: String) {
         var order = ""
@@ -138,6 +139,7 @@ class ShoppingCart {
             ]
             
             self.orderRef.child("orders_\(Int.random(in: 0...10000))").setValue(orderToSend)
+            //MARK: - here new orders to top
         }
     }
     

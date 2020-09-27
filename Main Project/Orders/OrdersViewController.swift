@@ -56,7 +56,6 @@ class OrdersViewController: UIViewController {
         
         configureNaivationBar()
         configureTableView()
-        getData()
     }
     
     //MARK: - UI
@@ -175,8 +174,13 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         infoOrderView.adressLabel.text = orders[indexPath.row].address
         infoOrderView.dataLabel.text = orders[indexPath.row].time
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
-        infoOrderView.statusLabel.textColor = configureStatusLablel(orders[indexPath.row].status)
         infoOrderView.statusLabel.text = orders[indexPath.row].status
+        if orders[indexPath.row].status == "0" {
+            infoOrderView.statusLabel.text = "Получен"
+//            infoOrderView.statusLabel.textColor = configureStatusLablel(orders[indexPath.row].status)
+            
+        }
+        infoOrderView.statusLabel.textColor = configureStatusLablel(infoOrderView.statusLabel.text ?? "")
         infoOrderView.moreButton.isHidden = true
         
         return infoOrderView
