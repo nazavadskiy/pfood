@@ -161,7 +161,7 @@ class DetailOrderViewController: UIViewController {
         let button = UIButton()
         button.setTitle("СОХР. ИЗМЕНЕНИЯ", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
         button.layer.cornerRadius = 5
@@ -265,7 +265,7 @@ class DetailOrderViewController: UIViewController {
             orderView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
-        for one in order?.orderP.split(separator: "|") ?? [] {
+        for one in order?.foodCart ?? [] {
             let parts = one.split(separator: " ")
             let count = Int(String(parts.last?.dropLast(3) ?? "")) ?? 0
             if count != 0 {
@@ -369,23 +369,23 @@ class DetailOrderViewController: UIViewController {
     }
     
     
-    @objc func saveAction() {
-        guard let order = order else { return }
-        NetworkManager().setDetailOrder(id: order.id,
-                                        orderP: order.orderP,
-                                        comment:commentaryTextField.text ?? "" ,
-                                        completion: { (suc, _) in
-            if (suc?.done ?? 0) == 1 {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                let alert = UIAlertController(title: "Заказы", message: "Запрос не изменился", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        })
-    }
+//    @objc func saveAction() {
+//        guard let order = order else { return }
+//        NetworkManager().setDetailOrder(id: order.id,
+//                                        foodCart: order.foodCart,
+//                                        comment:commentaryTextField.text ?? "" ,
+//                                        completion: { (suc, _) in
+//            if (suc?.done ?? 0) == 1 {
+//                DispatchQueue.main.async {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            } else {
+//                let alert = UIAlertController(title: "Заказы", message: "Запрос не изменился", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        })
+//    }
     
     
     var isKeyboardShown = false

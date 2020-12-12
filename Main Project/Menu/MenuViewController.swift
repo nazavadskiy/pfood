@@ -62,7 +62,7 @@ class MenuViewController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
-        configureNaivationBar()
+        configureNavigationBar()
         configureCollectionView()
     }
     
@@ -88,7 +88,7 @@ class MenuViewController: UIViewController {
         }
     }
     
-    func configureNaivationBar() {
+    func configureNavigationBar() {
         navigationController?.navigationBar.barTintColor = .orange
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor  = .white

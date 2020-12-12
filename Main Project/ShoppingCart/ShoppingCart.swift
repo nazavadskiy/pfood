@@ -31,7 +31,7 @@ class ShoppingCart {
     static let shared = ShoppingCart()
     
     var items: [NextMenuModel: Int] = [:]
-    lazy var currentOrder: OrderRequest? = self.fetchOrder()
+    //lazy var currentOrder: OrderRequest? = self.fetchOrder()
     
     
     func increaseItemCount(_ item: NextMenuModel) {
@@ -93,12 +93,12 @@ class ShoppingCart {
     //MARK: - sending order
     
     @objc public func sendOrder(paymentType: String, adressZakaz: String) {
-        var order = ""
+        var order: [String] = []
         var i = 0
         for (item, count) in items {
             i += 1
             if count == 0 { continue }
-            order += item.name + " " + String(count) + "шт. | "
+            order.append(item.name + " " + String(count) + "шт.")
         }
         
         guard let id = UserDefaults.standard.string(forKey: "id") else { return }
@@ -119,18 +119,18 @@ class ShoppingCart {
                                      price: String(self.getSum()),
                                      time: now,
                                      paymentType: paymentType,
-                                     orderP: order,
+                                     foodCart: order,
                                      completeTime: close,
                                      status: "0", id: "")
            
-            self.saveOrder(with: order)
+            //self.saveOrder(with: order)
             
             let orderToSend: [String: Any] = [
                 "address" : order.address,
                 "comment" : order.comment ?? "",
                 "completeTime" : order.completeTime,
                 "name" : order.name,
-                "orderP" : order.orderP,
+                "foodCart" : order.foodCart,
                 "paymentType" : order.paymentType,
                 "phone" : order.phone,
                 "price" : order.price,
@@ -146,51 +146,51 @@ class ShoppingCart {
     
     
     
-    func saveOrder(with order: OrderRequest) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Order", in: context) else { return }
-        let model = Order(entity: entity, insertInto: context)
-        
-        model.name = order.name
-        model.address = order.address
-        model.phone = order.phone
-        model.price = order.price
-        model.time = order.time
-        model.paymentType = order.paymentType
-        model.order = order.orderP
-        model.completeTime = order.completeTime
-        model.status = order.status
-        
-        do {
-            try context.save()
-        } catch let error as NSError{
-            print(error.localizedDescription)
-        }
-    }
+//    func saveOrder(with order: OrderRequest) {
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Order", in: context) else { return }
+//        let model = Order(entity: entity, insertInto: context)
+//
+//        model.name = order.name
+//        model.address = order.address
+//        model.phone = order.phone
+//        model.price = order.price
+//        model.time = order.time
+//        model.paymentType = order.paymentType
+//        model.order = order.foodCart
+//        model.completeTime = order.completeTime
+//        model.status = order.status
+//
+//        do {
+//            try context.save()
+//        } catch let error as NSError{
+//            print(error.localizedDescription)
+//        }
+//    }
     
-    func fetchOrder() -> OrderRequest? {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<Order> = Order.fetchRequest()
-        
-        do {
-            let result = try context.fetch(fetchRequest)
-            if result.isEmpty { return nil }
-            
-            
-            let order = OrderRequest(name: result.first?.name ?? "",
-                                     address: result.first?.address  ?? "",
-                                     phone: result.first?.phone ?? "",
-                                     price: result.first?.price  ?? "",
-                                     time: result.first?.time  ?? "",
-                                     paymentType: result.first?.paymentType  ?? "",
-                                     orderP: result.first?.order  ?? "",
-                                     completeTime: result.first?.completeTime  ?? "",
-                                     status: result.first?.status  ?? "", id: "")
-            return order
-        } catch let error as NSError{
-            print(error.localizedDescription)
-        }
-        return nil
-    }
+//    func fetchOrder() -> OrderRequest? {
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        let fetchRequest: NSFetchRequest<Order> = Order.fetchRequest()
+//
+//        do {
+//            let result = try context.fetch(fetchRequest)
+//            if result.isEmpty { return nil }
+//
+//
+//            let order = OrderRequest(name: result.first?.name ?? "",
+//                                     address: result.first?.address  ?? "",
+//                                     phone: result.first?.phone ?? "",
+//                                     price: result.first?.price  ?? "",
+//                                     time: result.first?.time  ?? "",
+//                                     paymentType: result.first?.paymentType  ?? "",
+//                                     foodCart: result.first?.order  ?? "",
+//                                     completeTime: result.first?.completeTime  ?? "",
+//                                     status: result.first?.status  ?? "", id: "")
+//            return order
+//        } catch let error as NSError{
+//            print(error.localizedDescription)
+//        }
+//        return nil
+//    }
     
 }

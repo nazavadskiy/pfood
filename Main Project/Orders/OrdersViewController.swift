@@ -126,7 +126,7 @@ class OrdersViewController: UIViewController {
                 let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
                 let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
                 let completeTime = (pOrder.value as? NSDictionary)?["completeTime"] as? String ?? ""
-                let orderP = (pOrder.value as? NSDictionary)?["orderP"] as? String ?? ""
+                let foodCart = (pOrder.value as? NSDictionary)?["foodCart"] as? [String] ?? []
                 let paymentType = (pOrder.value as? NSDictionary)?["paymentType"] as? String ?? ""
                 let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
                 let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
@@ -134,7 +134,7 @@ class OrdersViewController: UIViewController {
                 let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
                 let id = pOrder.key
                 
-                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, orderP: orderP, completeTime: completeTime, status: status, id: id)
+                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, foodCart: foodCart, completeTime: completeTime, status: status, id: id)
                 self.orders.insert(orderPeace, at: 0)
                 
                 DispatchQueue.main.async {

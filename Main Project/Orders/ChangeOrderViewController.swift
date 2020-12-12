@@ -49,7 +49,7 @@ class ChangeOrderViewController: UIViewController {
     
     let saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Сохранить изменния", for: .normal)
+        button.setTitle("Сохранить изменения", for: .normal)
         button.backgroundColor = .orange
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
@@ -57,7 +57,7 @@ class ChangeOrderViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         return button
     }()
 
@@ -85,7 +85,7 @@ class ChangeOrderViewController: UIViewController {
             $0.removeFromSuperview()
         }
         
-        for one in order?.orderP.split(separator: "|") ?? [] {
+        for one in order?.foodCart ?? [] {
             let parts = one.split(separator: " ")
             var name = ""
             for (count, part) in parts.enumerated() {
@@ -125,16 +125,15 @@ class ChangeOrderViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        var orderText = ""
+        var orderText: [String] = []
         var i = 0
         for view in self.orderView.arrangedSubviews {
             i += 1
             guard let orderItem = view as? OrderChangeItem else { return }
             guard let item = orderItem.item else { return }
-            orderText += "\(item.name) \(String(orderItem.count))шт."
-            if i < self.orderView.arrangedSubviews.count { orderText += " | "}
+            orderText.append("\(item.name) \(String(orderItem.count))шт.")
         }
-        self.order?.orderP = orderText
+        self.order?.foodCart = orderText
     }
     
     @objc func changeOrder() {
@@ -161,7 +160,7 @@ class ChangeOrderViewController: UIViewController {
                             let products = value?["products"] as? String ?? ""
                             let sale = value?["sale"] as? Bool ?? false
                             let newNextMenuModel = NextMenuModel(description: description, imageURL: imageURL, name: name, price: price, products: products, sale: sale)
-                            self.order?.orderP += " | \(name) 0шт."
+                            self.order?.foodCart.append("\(name) 0шт.")
                             self.addItem(model: newNextMenuModel, count: count)
                         }
                     }
@@ -181,23 +180,23 @@ class ChangeOrderViewController: UIViewController {
         }
     }
     
-    @objc func saveAction() {
-        guard let order = order else { return }
-        NetworkManager().setDetailOrder(id: order.id,
-                                        orderP: order.orderP,
-                                        comment: "",
-                                        completion: { (suc, _) in
-            if (suc?.done ?? 0) == 1 {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                let alert = UIAlertController(title: "Заказы", message: "Запрос не изменился", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        })
-    }
+//    @objc func saveAction() {
+//        guard let order = order else { return }
+//        NetworkManager().setDetailOrder(id: order.id,
+//                                        foodCart: order.foodCart,
+//                                        comment: "",
+//                                        completion: { (suc, _) in
+//            if (suc?.done ?? 0) == 1 {
+//                DispatchQueue.main.async {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            } else {
+//                let alert = UIAlertController(title: "Заказы", message: "Запрос не изменился", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        })
+//    }
 
     
 }

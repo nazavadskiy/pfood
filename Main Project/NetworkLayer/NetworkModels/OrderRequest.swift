@@ -16,26 +16,26 @@ public class OrderRequest: Decodable {
     var price: String
     var time: String
     var paymentType: String
-    var orderP: String
+    var foodCart: [String]
     var completeTime: String
     var status: String
     var comment: String?
     
     
-    init(name: String, address: String, phone: String, price: String, time: String, paymentType: String, orderP: String, completeTime: String, status: String, id: String) {
+    init(name: String, address: String, phone: String, price: String, time: String, paymentType: String, foodCart: [String], completeTime: String, status: String, id: String) {
         self.name = name
         self.address = address
         self.phone = phone
         self.price = price
         self.time = time
         self.paymentType = paymentType
-        self.orderP = orderP
+        self.foodCart = foodCart
         self.completeTime = completeTime
         self.status = status
         self.id = id
     }
     
-    func createDictionary() -> Dictionary<String, String>{
+    func createDictionary() -> Dictionary<String, Any>{
         let a = [
             "name" : name,
             "address" : address,
@@ -43,11 +43,11 @@ public class OrderRequest: Decodable {
             "price" : price,
             "time" : time,
             "payment_type" : paymentType,
-            "order_p" : orderP,
+            "order_p" : foodCart,
             "complete_time" : completeTime,
             "status" : status,
             "key" : "gDjRtEYOTwqW0w@ezsVn",
-        ]
+            ] as [String : Any]
         return a
     }
 
@@ -62,7 +62,7 @@ public class OrderRequest: Decodable {
         case price = "price"
         case time = "time"
         case paymentType = "payment_type"
-        case orderP = "order_p"
+        case foodCart = "order_p"
         case comment = "comment"
     }
     
@@ -76,7 +76,7 @@ public class OrderRequest: Decodable {
         price = try container.decode(String.self, forKey: .price)
         time = try container.decode(String.self, forKey: .time)
         paymentType = try container.decode(String.self, forKey: .paymentType)
-        orderP = try container.decode(String.self, forKey: .orderP)
+        foodCart = try container.decode([String].self, forKey: .foodCart)
         completeTime = ""
         status = ""
         do {
