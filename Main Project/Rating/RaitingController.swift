@@ -22,7 +22,7 @@ class RaitingsViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Моя команда", for: .normal)
-        button.addTarget(self, action: #selector(openMyTeam(_ :)), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(openMyTeam(_ :)), for: .touchUpInside)
         button.backgroundColor = .orange
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
@@ -44,42 +44,42 @@ class RaitingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        count(nil)
+//        count(nil)
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
     }
     
-    func positionOf(id: String, _ complition: @escaping (TeamModel)->()){
-        count {
-            var i = 0
-            while (i < self.teams.count) {
-                if self.teams[i].teamId == id {
-                    complition(self.teams[i])
-                    break
-                }
-                i += 1
-            }
-        }
-    }
+//    func positionOf(id: String, _ complition: @escaping (TeamModel)->()){
+//        count {
+//            var i = 0
+//            while (i < self.teams.count) {
+//                if self.teams[i].teamId == id {
+//                    complition(self.teams[i])
+//                    break
+//                }
+//                i += 1
+//            }
+//        }
+//    }
     
-    func count(_ complition: (()->())?) {
-        var teams:[TeamModel] = []
-        var count = 0
-        NetworkManager().getTopTeam { (response, _) in
-            for team in response ?? [] {
-                let model = TeamModel(teamName: team.name, teamRating: Int(team.point) ?? 0, invite: team.invite, teamId: team.id)
-                count += 1
-                model.teamPlace = count
-                teams.append(model)
-            }
-            self.teams = teams
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            complition?()
-        }
-    }
+//    func count(_ complition: (()->())?) {
+//        var teams:[TeamModel] = []
+//        var count = 0
+//        NetworkManager().getTopTeam { (response, _) in
+//            for team in response ?? [] {
+//                let model = TeamModel(teamName: team.name, teamRating: Int(team.point) ?? 0, invite: team.invite, teamId: team.id)
+//                count += 1
+//                model.teamPlace = count
+//                teams.append(model)
+//            }
+//            self.teams = teams
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//            complition?()
+//        }
+//    }
     
     func setUpTableView() {
         tableView = UITableView()
@@ -110,21 +110,21 @@ class RaitingsViewController: UIViewController {
         joinButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
     }
     
-    @objc func openMyTeam(_ sender: UIButton) {
-        let vc = TeamViewController()
-        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
-//        sender.backgroundColor = .red
-        let value = sender.layer.opacity
-        sender.layer.opacity = 0.3
-        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
-        animation.duration = 0.3
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        animation.fromValue = sender.layer.opacity
-        animation.toValue = sender.layer.opacity = value
-        sender.layer.add(animation, forKey: "tapped")
-        sender.layer.opacity = value
-    }
+//    @objc func openMyTeam(_ sender: UIButton) {
+//        let vc = TeamViewController()
+//        vc.delegate = self
+//        navigationController?.pushViewController(vc, animated: true)
+////        sender.backgroundColor = .red
+//        let value = sender.layer.opacity
+//        sender.layer.opacity = 0.3
+//        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
+//        animation.duration = 0.3
+//        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+//        animation.fromValue = sender.layer.opacity
+//        animation.toValue = sender.layer.opacity = value
+//        sender.layer.add(animation, forKey: "tapped")
+//        sender.layer.opacity = value
+//    }
     
     func configureNaivationBar() {
         navigationController?.navigationBar.barTintColor = .orange
@@ -204,11 +204,11 @@ extension RaitingsViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = InfoTeamViewController()
-        detailVC.team = teams[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let detailVC = InfoTeamViewController()
+//        detailVC.team = teams[indexPath.row]
+//        self.navigationController?.pushViewController(detailVC, animated: true)
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: .zero)

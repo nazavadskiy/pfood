@@ -131,10 +131,15 @@ class OrdersViewController: UIViewController {
                 let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
                 let price = (pOrder.value as? NSDictionary)?["price"] as? String ?? ""
                 let status = (pOrder.value as? NSDictionary)?["status"] as? String ?? ""
-                let time = (pOrder.value as? NSDictionary)?["time"] as? String ?? ""
+                let cook = (pOrder.value as? NSDictionary)?["cook"] as? String ?? ""
+                let courier = (pOrder.value as? NSDictionary)?["courier"] as? String ?? ""
+                let comment = (pOrder.value as? NSDictionary)?["comment"] as? String ?? ""
+                let deliveredTime = (pOrder.value as? NSDictionary)?["time/deliveredTime"] as? String ?? ""
+                let orderTime = (pOrder.value as? NSDictionary)?["time/orderTime"] as? String ?? ""
+                let pickedUpTime = (pOrder.value as? NSDictionary)?["time/pickedUpTime"] as? String ?? ""
                 let id = pOrder.key
                 
-                let orderPeace = OrderRequest(name: name, address: address, phone: phone, price: price, time: time, paymentType: paymentType, foodCart: foodCart, completeTime: completeTime, status: status, id: id)
+                let orderPeace = OrderRequest(address: address, comment: comment, cook: cook, courier: courier, foodCart: foodCart, name: name, paymentType: paymentType, phone: phone, price: price, status: status, completeTime: completeTime, deliveredTime: deliveredTime, orderTime: orderTime, pickedUpTime: pickedUpTime, id: id)
                 self.orders.insert(orderPeace, at: 0)
                 
                 DispatchQueue.main.async {
@@ -172,7 +177,7 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         guard let infoOrderView = cell as? InfoOrderView else { return InfoOrderView() }
         infoOrderView.userNameLabel.text = orders[indexPath.row].name
         infoOrderView.adressLabel.text = orders[indexPath.row].address
-        infoOrderView.dataLabel.text = orders[indexPath.row].time
+        infoOrderView.dataLabel.text = orders[indexPath.row].orderTime
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
         infoOrderView.statusLabel.text = orders[indexPath.row].status
         if orders[indexPath.row].status == "0" {

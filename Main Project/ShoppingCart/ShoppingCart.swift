@@ -105,40 +105,66 @@ class ShoppingCart {
         userRef.child(id).observe(.value) { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let name = value?["name"] as? String ?? "Name"
-            let adress = value?["address"] as? String ?? "Adress"
+            let adress = value?["address"] as? String ?? "Address"
             let df = DateFormatter()
-            let closeDate = Date().addingTimeInterval(10)
             df.dateFormat = "HH:mm:ss"
             let now = df.string(from: Date())
-            let close = df.string(from: closeDate)
             let phone = UserDefaults.standard.string(forKey: "phone")
+            let comment = value?["comment"] as? String ?? ""
 
-            let order = OrderRequest(name: name,
-                                     address: adress,
+            let order = OrderRequest(address: adress,
+                                     comment: comment,
+                                     cook: "",
+                                     courier: "",
+                                     foodCart: order,
+                                     name: name,
+                                     paymentType: paymentType,
                                      phone: phone ?? "",
                                      price: String(self.getSum()),
-                                     time: now,
-                                     paymentType: paymentType,
-                                     foodCart: order,
-                                     completeTime: close,
-                                     status: "0", id: "")
+                                     status: "0",
+                                     completeTime: "",
+                                     deliveredTime: "",
+                                     orderTime: now,
+                                     pickedUpTime: "",
+                                     id: "")
            
             //self.saveOrder(with: order)
             
             let orderToSend: [String: Any] = [
                 "address" : order.address,
-                "comment" : order.comment ?? "",
-                "completeTime" : order.completeTime,
+                "comment" : order.comment,
                 "name" : order.name,
                 "foodCart" : order.foodCart,
                 "paymentType" : order.paymentType,
                 "phone" : order.phone,
                 "price" : order.price,
                 "status" : "Получен",
-                "time" : order.time
+                "cook" : order.cook,
+                "courier" : order.courier
             ]
             
-            self.orderRef.child("orders_\(Int.random(in: 0...10000))").setValue(orderToSend)
+            let timeToSend: [String: String] = [
+                "orderTime" : order.orderTime,
+                "completeTime" : order.completeTime,
+                "deliveredTime" : order.deliveredTime,
+                "pickedUpTime" : order.pickedUpTime
+            ]
+            
+            let df1 = DateFormatter()
+            df1.dateFormat = "yy\\MM\\dd"
+            let nowDate = df1.string(from: Date())
+            
+            let ordRef = Database.database().reference()
+            
+            ordRef.child("orders").observeSingleEvent(of: .value, with: { (snapshot) in
+                snapshot.children.suffix(1).forEach({ (child) in
+                    if let child = child as? DataSnapshot {
+                        let newOrderNumber = (Int(child.key.suffix(3)) ?? -1) + 1
+                        self.orderRef.child("\(nowDate)_\(String(format: "%03d",newOrderNumber))").setValue(orderToSend)
+                        self.orderRef.child("\(nowDate)_\(String(format: "%03d",newOrderNumber))/time").setValue(timeToSend)
+                    }
+                })
+            })
             //MARK: - here new orders to top
         }
     }

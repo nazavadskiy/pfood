@@ -117,9 +117,9 @@ class UserInfoViewController: UIViewController {
     @objc func saveData() {
         let user = Auth.auth().currentUser
         if let currentUser = user {
-            NetworkManager().addUser(id: currentUser.uid) {response,_ in
-                print(response ?? "")
-            }
+//            NetworkManager().addUser(id: currentUser.uid) {response,_ in
+//                print(response ?? "")
+//            }
             let userRef = ref.child("users").child(currentUser.uid)
             let values: [String : Any] = ["address": adressTextField.text ?? "Nil", "name": nameTextField.text ?? "Nil"]
             userRef.setValue(values)

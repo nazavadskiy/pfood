@@ -180,13 +180,13 @@ class ProfileController: UIViewController {
         guard let id = UserDefaults.standard.string(forKey: "id") else { return }
         self.ref.child("users/\(id)/name").setValue(registrationView.name.text ?? "")
         self.ref.child("users/\(id)/address").setValue(registrationView.adress.text ?? "")
-        NetworkManager().getUserInfo(id: id) { (userInfo, _) in
-            DispatchQueue.main.async {
-//                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
-//                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
-//                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
-            }
-        }
+//        NetworkManager().getUserInfo(id: id) { (userInfo, _) in
+//            DispatchQueue.main.async {
+////                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
+////                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
+////                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
+//            }
+//        }
         let ac = UIAlertController(title: "Сохранено!", message: "Ваше имя и адрес были обновлены.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
@@ -207,13 +207,13 @@ class ProfileController: UIViewController {
         }
 //        stack.insertArrangedSubview(userInfo, at: 0)
         guard let id = UserDefaults.standard.string(forKey: "id") else { return }
-        NetworkManager().getUserInfo(id: id) { (userInfo, _) in
-            DispatchQueue.main.async {
-//                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
-//                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
-//                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
-            }
-        }
+//        NetworkManager().getUserInfo(id: id) { (userInfo, _) in
+//            DispatchQueue.main.async {
+////                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"
+////                self.userInfo.monthLabel.text = "За месяц: " + (userInfo?.pointM ?? "0")
+////                self.userInfo.allTimeLabel.text = "За все время: " + (userInfo?.point ?? "0")
+//            }
+//        }
     }
     
     @objc func logOut() {

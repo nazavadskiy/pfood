@@ -186,7 +186,7 @@ class DetailOrderViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitle("ЗАКАЗ ВЫПОЛНЕН", for: .normal)
-        button.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
@@ -297,7 +297,7 @@ class DetailOrderViewController: UIViewController {
         
         name.text = order?.name
         phone.text = order?.phone
-        orderTime.text = order?.time
+        orderTime.text = order?.orderTime
         price.text = order?.price
         userAdress.text = order?.address
         userPayment.text = order?.paymentType
@@ -353,20 +353,20 @@ class DetailOrderViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func doneAction() {
-        guard let orderId = order?.id else { return }
-        NetworkManager().setInfoOrder(id: orderId) { (suc, _) in
-            if (suc?.done ?? 0) == 1 {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                let alert = UIAlertController(title: "Заказы", message: "Запрос не закрылся", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-    }
+//    @objc func doneAction() {
+//        guard let orderId = order?.id else { return }
+//        NetworkManager().setInfoOrder(id: orderId) { (suc, _) in
+//            if (suc?.done ?? 0) == 1 {
+//                DispatchQueue.main.async {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            } else {
+//                let alert = UIAlertController(title: "Заказы", message: "Запрос не закрылся", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//    }
     
     
 //    @objc func saveAction() {
