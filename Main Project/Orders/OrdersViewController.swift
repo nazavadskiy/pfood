@@ -15,7 +15,6 @@ class OrdersViewController: UIViewController {
     let ref = Database.database().reference()
     
     @objc func refreshData(_ sender: Any) {
-        orders.removeAll()
         getData()
     }
     
@@ -68,8 +67,7 @@ class OrdersViewController: UIViewController {
         
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        getData()
-        
+        getData()  
     }
     
     fileprivate func configureNaivationBar() {
@@ -120,12 +118,12 @@ class OrdersViewController: UIViewController {
     
     //MARK: - network protocol
     fileprivate func getData() {
+        orders.removeAll()
         let orders = ref.child("orders")
         orders.observe(.value) { (snapshot) in
             for pOrder in snapshot.children.allObjects as! [DataSnapshot] {
                 let address = (pOrder.value as? NSDictionary)?["address"] as? String ?? ""
                 let name = (pOrder.value as? NSDictionary)?["name"] as? String ?? ""
-                let completeTime = (pOrder.value as? NSDictionary)?["completeTime"] as? String ?? ""
                 let foodCart = (pOrder.value as? NSDictionary)?["foodCart"] as? [String] ?? []
                 let paymentType = (pOrder.value as? NSDictionary)?["paymentType"] as? String ?? ""
                 let phone = (pOrder.value as? NSDictionary)?["phone"] as? String ?? ""
@@ -134,11 +132,16 @@ class OrdersViewController: UIViewController {
                 let cook = (pOrder.value as? NSDictionary)?["cook"] as? String ?? ""
                 let courier = (pOrder.value as? NSDictionary)?["courier"] as? String ?? ""
                 let comment = (pOrder.value as? NSDictionary)?["comment"] as? String ?? ""
-                let deliveredTime = (pOrder.value as? NSDictionary)?["time/deliveredTime"] as? String ?? ""
-                let orderTime = (pOrder.value as? NSDictionary)?["time/orderTime"] as? String ?? ""
-                let pickedUpTime = (pOrder.value as? NSDictionary)?["time/pickedUpTime"] as? String ?? ""
                 let id = pOrder.key
                 
+                let time = (pOrder.value as? NSDictionary)?["time"] as? [String : String] ?? ["" : ""]
+                
+                
+                let deliveredTime = time["deliveredTime"] ?? ""
+                let orderTime = time["orderTime"] ?? ""
+                let pickedUpTime = time["pickedUpTime"] ?? ""
+                let completeTime = time["completeTime"] ?? ""
+
                 let orderPeace = OrderRequest(address: address, comment: comment, cook: cook, courier: courier, foodCart: foodCart, name: name, paymentType: paymentType, phone: phone, price: price, status: status, completeTime: completeTime, deliveredTime: deliveredTime, orderTime: orderTime, pickedUpTime: pickedUpTime, id: id)
                 self.orders.insert(orderPeace, at: 0)
                 
