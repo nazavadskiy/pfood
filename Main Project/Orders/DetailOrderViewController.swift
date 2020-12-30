@@ -143,6 +143,7 @@ class DetailOrderViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
         textField.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        textField.isEnabled = false
         return textField
     }()
     
@@ -157,17 +158,17 @@ class DetailOrderViewController: UIViewController {
         return stack
     }()
     
-    lazy var saveChangesButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("СОХР. ИЗМЕНЕНИЯ", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        //button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
-        button.titleLabel?.textColor = .white
-        button.backgroundColor = .orange
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
+//    lazy var saveChangesButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("СОХР. ИЗМЕНЕНИЯ", for: .normal)
+//        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+//        //button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+//        button.titleLabel?.textColor = .white
+//        button.backgroundColor = .orange
+//        button.layer.cornerRadius = 5
+//        button.clipsToBounds = true
+//        return button
+//    }()
     
     let changeOrderButton: UIButton = {
         let button = UIButton()
@@ -186,7 +187,7 @@ class DetailOrderViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitle("ЗАКАЗ ВЫПОЛНЕН", for: .normal)
-//        button.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
@@ -200,6 +201,7 @@ class DetailOrderViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitle("УДАЛИТЬ ЗАКАЗ", for: .normal)
+        button.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
@@ -272,10 +274,13 @@ class DetailOrderViewController: UIViewController {
                 let a = UILabel(frame: .zero)
                 a.text = String(one)
                 orderView.addArrangedSubview(a)
-
             }
         }
-
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        saveAction()
     }
     
     override func viewDidLoad() {
@@ -288,10 +293,10 @@ class DetailOrderViewController: UIViewController {
         configureScrollView()
         configureStackView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
-        let orderRef = ref.child(id ?? "")
+//        let orderRef = ref.child(id ?? "")
 //        orderRef.observe(.value, andPreviousSiblingKeyWith: { snappshot})
         //MARK: - here last
         
@@ -318,7 +323,7 @@ class DetailOrderViewController: UIViewController {
         stack.addArrangedSubview(userPayment)
         stack.addArrangedSubview(commentaryPlaceholder)
         stack.addArrangedSubview(commentaryTextField)
-        buttonStack.addArrangedSubview(saveChangesButton)
+//        buttonStack.addArrangedSubview(saveChangesButton)
         buttonStack.addArrangedSubview(changeOrderButton)
         stack.addArrangedSubview(doneButton)
         
@@ -413,6 +418,28 @@ class DetailOrderViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
 
+    @objc func saveAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["foodCart" : self.order?.foodCart ?? []])
+        ref.updateChildValues(["price" : self.order?.price ?? "0"])
+    }
     
+    @objc func deleteAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        self.order = nil
+        ref.removeValue()
+        
+        let alert = UIAlertController(title: "Заказ удалён!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    @objc func doneAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["status" : "Выполнен"])
+        
+        let alert = UIAlertController(title: "Заказ выполнен!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

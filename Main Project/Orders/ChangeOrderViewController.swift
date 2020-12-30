@@ -47,19 +47,19 @@ class ChangeOrderViewController: UIViewController {
         return button
     }()
     
-    let saveButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Сохранить изменения", for: .normal)
-        button.backgroundColor = .orange
-        button.titleLabel?.textColor = .white
-        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
-        button.layer.cornerRadius = 5
-        button.layer.masksToBounds = true
-        //button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
-        return button
-    }()
+//    let saveButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Сохранить изменения", for: .normal)
+//        button.backgroundColor = .orange
+//        button.titleLabel?.textColor = .white
+//        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
+//        button.layer.cornerRadius = 5
+//        button.layer.masksToBounds = true
+//        button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+//        return button
+//    }()
 
     
     private func setUpStack() {
@@ -93,7 +93,9 @@ class ChangeOrderViewController: UIViewController {
                 name += name == "" ? part : " " + part
             }
             let count = Int(String(parts.last?.dropLast(3) ?? "")) ?? 0
-            self.addItem(name: name, count: count)
+            if (count > 0){
+                self.addItem(name: name, count: count)
+            }
         }
 
         
@@ -114,7 +116,7 @@ class ChangeOrderViewController: UIViewController {
         setUpStack()
         mainStackView.addArrangedSubview(orderView)
         mainStackView.addArrangedSubview(changeButton)
-        mainStackView.addArrangedSubview(saveButton)
+//        mainStackView.addArrangedSubview(saveButton)
         scrollView.contentSize = mainStackView.bounds.size
         
 //        navigationItem.setHidesBackButton(true, animated: false)
@@ -126,13 +128,16 @@ class ChangeOrderViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         var orderText: [String] = []
+        var price = 0
         var i = 0
         for view in self.orderView.arrangedSubviews {
             i += 1
             guard let orderItem = view as? OrderChangeItem else { return }
             guard let item = orderItem.item else { return }
             orderText.append("\(item.name) \(String(orderItem.count))шт.")
+            price += Int(orderItem.sumLabel.text ?? "0") ?? 0
         }
+        self.order?.price = "\(price)"
         self.order?.foodCart = orderText
     }
     
@@ -160,7 +165,7 @@ class ChangeOrderViewController: UIViewController {
                             let products = value?["products"] as? String ?? ""
                             let sale = value?["sale"] as? Bool ?? false
                             let newNextMenuModel = NextMenuModel(description: description, imageURL: imageURL, name: name, price: price, products: products, sale: sale)
-                            self.order?.foodCart.append("\(name) 0шт.")
+                            self.order?.foodCart.append("\(name) 1шт.")
                             self.addItem(model: newNextMenuModel, count: count)
                         }
                     }
@@ -175,28 +180,9 @@ class ChangeOrderViewController: UIViewController {
             let a = OrderChangeItem()
             a.count = count
             a.item = model
+            a.count = count
             self.orderView.addArrangedSubview(a)
             self.view.layoutIfNeeded()
         }
     }
-    
-//    @objc func saveAction() {
-//        guard let order = order else { return }
-//        NetworkManager().setDetailOrder(id: order.id,
-//                                        foodCart: order.foodCart,
-//                                        comment: "",
-//                                        completion: { (suc, _) in
-//            if (suc?.done ?? 0) == 1 {
-//                DispatchQueue.main.async {
-//                    self.navigationController?.popViewController(animated: true)
-//                }
-//            } else {
-//                let alert = UIAlertController(title: "Заказы", message: "Запрос не изменился", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-//            }
-//        })
-//    }
-
-    
 }

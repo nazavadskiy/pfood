@@ -37,7 +37,7 @@ class OrdersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getData()
+//        getData()
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
@@ -88,7 +88,7 @@ class OrdersViewController: UIViewController {
         rightButton.tintColor = .white
         
         let titleView = UILabel(frame: .zero)
-        titleView.text = "Заказ"
+        titleView.text = "Заказы"
         titleView.font = .boldSystemFont(ofSize: 20)
         titleView.textColor = .white
         titleView.textAlignment = .center
@@ -186,7 +186,6 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         if orders[indexPath.row].status == "0" {
             infoOrderView.statusLabel.text = "Получен"
 //            infoOrderView.statusLabel.textColor = configureStatusLablel(orders[indexPath.row].status)
-            
         }
         infoOrderView.statusLabel.textColor = configureStatusLablel(infoOrderView.statusLabel.text ?? "")
         infoOrderView.moreButton.isHidden = true

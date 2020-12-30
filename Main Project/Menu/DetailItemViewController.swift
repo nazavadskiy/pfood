@@ -202,7 +202,7 @@ class DetailItemViewController: UIViewController {
         buttonStack.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor).isActive = true
         buttonStack.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor).isActive = true
         buttonStack.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
-        setUpUI()
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -210,6 +210,7 @@ class DetailItemViewController: UIViewController {
         guard let item = item else { return }
         count = ShoppingCart.shared.items[item] ?? 0
         scrollView.contentSize = mainStack.bounds.size
+        setUpUI()
     }
     
     func setUpUI() {

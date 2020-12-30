@@ -23,7 +23,7 @@ public class OrderRequest: Decodable {
     var deliveredTime: String
     var orderTime: String
     var pickedUpTime: String
-    var id: String = "0"
+    var id: String
     
     
     init(address: String, comment: String, cook: String, courier: String, foodCart: [String], name: String, paymentType: String, phone: String, price: String, status: String, completeTime: String, deliveredTime: String, orderTime: String, pickedUpTime: String, id: String) {

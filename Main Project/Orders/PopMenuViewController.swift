@@ -68,7 +68,7 @@ extension PopMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        delegate?.addItem(name: cell?.textLabel?.text ?? "", count: 0)
+        delegate?.addItem(name: cell?.textLabel?.text ?? "", count: 1)
         self.dismiss(animated: true, completion: nil)
     }
     

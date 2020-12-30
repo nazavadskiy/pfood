@@ -139,6 +139,7 @@ class OrderChangeItem: UIView {
         mainStack.addArrangedSubview(buttonStack)
         mainStack.addArrangedSubview(sumLabel)
         
+        
         let width = UIScreen.main.bounds.width
         veryMainStack.translatesAutoresizingMaskIntoConstraints = false
         veryMainStack.widthAnchor.constraint(equalToConstant: width).isActive = true
