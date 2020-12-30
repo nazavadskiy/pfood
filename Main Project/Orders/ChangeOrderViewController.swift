@@ -137,6 +137,7 @@ class ChangeOrderViewController: UIViewController {
             orderText.append("\(item.name) \(String(orderItem.count))шт.")
             price += Int(orderItem.sumLabel.text ?? "0") ?? 0
         }
+        print("price=\(price)")
         self.order?.price = "\(price)"
         self.order?.foodCart = orderText
     }

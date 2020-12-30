@@ -273,9 +273,11 @@ class DetailOrderViewController: UIViewController {
             if count != 0 {
                 let a = UILabel(frame: .zero)
                 a.text = String(one)
+                a.numberOfLines = 2
                 orderView.addArrangedSubview(a)
             }
         }
+        price.text = "\(order?.price ?? "0")₽"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -303,7 +305,7 @@ class DetailOrderViewController: UIViewController {
         name.text = order?.name
         phone.text = order?.phone
         orderTime.text = order?.orderTime
-        price.text = order?.price
+        
         userAdress.text = order?.address
         userPayment.text = order?.paymentType
         commentaryTextField.text = order?.comment

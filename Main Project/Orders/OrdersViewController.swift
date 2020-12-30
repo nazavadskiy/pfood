@@ -37,7 +37,6 @@ class OrdersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        getData()
         
         let navBar = navigationController?.navigationBar as? MainNavigationBar
         navBar?.leftButton.isHidden = false
@@ -53,6 +52,8 @@ class OrdersViewController: UIViewController {
             view.backgroundColor = .white
         }
         
+        getData()
+        
         configureNaivationBar()
         configureTableView()
     }
@@ -67,7 +68,6 @@ class OrdersViewController: UIViewController {
         
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        getData()  
     }
     
     fileprivate func configureNaivationBar() {
