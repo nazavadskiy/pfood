@@ -114,18 +114,18 @@ class ShoppingCart {
 
             let order = OrderRequest(address: adress,
                                      comment: comment,
-                                     cook: "",
-                                     courier: "",
+                                     cook: nil,
+                                     courier: nil,
                                      foodCart: order,
                                      name: name,
                                      paymentType: paymentType,
                                      phone: phone ?? "",
                                      price: String(self.getSum()),
                                      status: "0",
-                                     completeTime: "",
-                                     deliveredTime: "",
+                                     completeTime: nil,
+                                     deliveredTime: nil,
                                      orderTime: now,
-                                     pickedUpTime: "",
+                                     pickedUpTime: nil,
                                      id: "")
            
             //self.saveOrder(with: order)
@@ -138,16 +138,16 @@ class ShoppingCart {
                 "paymentType" : order.paymentType,
                 "phone" : order.phone,
                 "price" : order.price,
-                "status" : "Получен",
-                "cook" : order.cook,
-                "courier" : order.courier
+                "status" : order.status,
+                "cook" : order.cook as Any,
+                "courier" : order.courier as Any
             ]
             
-            let timeToSend: [String: String] = [
+            let timeToSend: [String: Any] = [
                 "orderTime" : order.orderTime,
-                "completeTime" : order.completeTime,
-                "deliveredTime" : order.deliveredTime,
-                "pickedUpTime" : order.pickedUpTime
+                "completeTime" : order.completeTime as Any,
+                "deliveredTime" : order.deliveredTime as Any,
+                "pickedUpTime" : order.pickedUpTime as Any
             ]
             
             let df1 = DateFormatter()
@@ -159,7 +159,13 @@ class ShoppingCart {
             ordRef.child("orders").observeSingleEvent(of: .value, with: { (snapshot) in
                 snapshot.children.suffix(1).forEach({ (child) in
                     if let child = child as? DataSnapshot {
-                        let newOrderNumber = (Int(child.key.suffix(3)) ?? -1) + 1
+                        var newOrderNumber = (Int(child.key.suffix(3)) ?? -1) + 1
+                        
+                        let ind = child.key.firstIndex(of: " ") ?? child.key.endIndex
+                        if child.key[..<ind] != nowDate {
+                            newOrderNumber = 0
+                        }
+                           
                         self.orderRef.child("\(nowDate)_\(String(format: "%03d",newOrderNumber))").setValue(orderToSend)
                         self.orderRef.child("\(nowDate)_\(String(format: "%03d",newOrderNumber))/time").setValue(timeToSend)
                     }

@@ -104,12 +104,16 @@ class OrdersViewController: UIViewController {
     fileprivate func configureStatusLablel(_ strInfo: String) -> UIColor? {
         switch strInfo {
         case "Получен":
+            return .lightGray
+        case "Получен Курьером":
             return .gray
-        case "Отказан":
+        case "Отменен":
             return .red
         case "Выполнен":
             return .green
         case "В работе":
+            return .darkGray
+        case "Доставлен":
             return .orange
         default:
             return nil
@@ -184,7 +188,7 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         infoOrderView.phoneNumberLabel.text = orders[indexPath.row].phone
         infoOrderView.statusLabel.text = orders[indexPath.row].status
         if orders[indexPath.row].status == "0" {
-            infoOrderView.statusLabel.text = "Получен"
+            infoOrderView.statusLabel.text = ""
 //            infoOrderView.statusLabel.textColor = configureStatusLablel(orders[indexPath.row].status)
         }
         infoOrderView.statusLabel.textColor = configureStatusLablel(infoOrderView.statusLabel.text ?? "")

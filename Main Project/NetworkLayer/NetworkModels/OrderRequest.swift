@@ -11,22 +11,22 @@ import Foundation
 public class OrderRequest: Decodable {
     var address: String
     var comment: String
-    var cook: String
-    var courier: String
+    var cook: String?
+    var courier: String?
     var foodCart: [String]
     var name: String
     var paymentType: String
     var phone: String
     var price: String
     var status: String
-    var completeTime: String
-    var deliveredTime: String
+    var completeTime: String?
+    var deliveredTime: String?
     var orderTime: String
-    var pickedUpTime: String
+    var pickedUpTime: String?
     var id: String
     
     
-    init(address: String, comment: String, cook: String, courier: String, foodCart: [String], name: String, paymentType: String, phone: String, price: String, status: String, completeTime: String, deliveredTime: String, orderTime: String, pickedUpTime: String, id: String) {
+    init(address: String, comment: String, cook: String?, courier: String?, foodCart: [String], name: String, paymentType: String, phone: String, price: String, status: String, completeTime: String?, deliveredTime: String?, orderTime: String, pickedUpTime: String?, id: String) {
         self.address = address
         self.comment = comment
         self.cook = cook

@@ -206,7 +206,7 @@ class ProfileController: UIViewController {
             }
         }
 //        stack.insertArrangedSubview(userInfo, at: 0)
-        guard let id = UserDefaults.standard.string(forKey: "id") else { return }
+//        guard let id = UserDefaults.standard.string(forKey: "id") else { return }
 //        NetworkManager().getUserInfo(id: id) { (userInfo, _) in
 //            DispatchQueue.main.async {
 ////                self.userInfo.raitingLabel.text = "Ваш рейтинг: \(userInfo?.place ?? 0)"

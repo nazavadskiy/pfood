@@ -172,13 +172,71 @@ class DetailOrderViewController: UIViewController {
     
     let changeOrderButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitle("ИЗМЕНИТЬ ЗАКАЗ", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.titleLabel?.textColor = .white
         button.backgroundColor = .orange
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(changeOrder), for: .touchUpInside)
+        return button
+    }()
+    
+    let takeOrderButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitle("ПРИНЯТЬ ЗАКАЗ", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.textColor = .white
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(takeAction), for: .touchUpInside)
+        return button
+    }()
+    
+    let pickUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitle("ПРИНЯТЬ ЗАКАЗ", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.textColor = .white
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(pickUpAction), for: .touchUpInside)
+        return button
+    }()
+    
+    let deliveredButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitle("ЗАКАЗ ДОСТАВЛЕН", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.textColor = .white
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(deliveredAction), for: .touchUpInside)
+        return button
+    }()
+    
+    let inWorkButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.setTitle("ЗАКАЗ В РАБОТЕ", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.titleLabel?.textColor = .white
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(inWorkAction), for: .touchUpInside)
         return button
     }()
     
@@ -246,12 +304,16 @@ class DetailOrderViewController: UIViewController {
     fileprivate func configureStatusLablel(_ strInfo: String) -> UIColor? {
         switch strInfo {
         case "Получен":
+            return .lightGray
+        case "Получен Курьером":
             return .gray
-        case "Отказан":
+        case "Отменен":
             return .red
         case "Выполнен":
             return .green
         case "В работе":
+            return .darkGray
+        case "Доставлен":
             return .orange
         default:
             return nil
@@ -326,9 +388,6 @@ class DetailOrderViewController: UIViewController {
         stack.addArrangedSubview(commentaryPlaceholder)
         stack.addArrangedSubview(commentaryTextField)
 //        buttonStack.addArrangedSubview(saveChangesButton)
-        buttonStack.addArrangedSubview(changeOrderButton)
-        stack.addArrangedSubview(doneButton)
-        
         self.addAdminKeys()
         
 //        navigationItem.setHidesBackButton(true, animated: false)
@@ -343,8 +402,24 @@ class DetailOrderViewController: UIViewController {
             for nextId in snapshot.value as? NSArray ?? [] {
                 guard let nextId = nextId as? String, let self = self else { continue }
                 if nextId == id {
-                    self.stack.addArrangedSubview(self.buttonStack)
+                    self.stack.addArrangedSubview(self.takeOrderButton)
+                    self.stack.addArrangedSubview(self.inWorkButton)
+                    self.stack.addArrangedSubview(self.doneButton)
+                    self.stack.addArrangedSubview(self.changeOrderButton)
                     self.stack.addArrangedSubview(self.deleteButton)
+                    
+                    break
+                }
+            }
+        }
+        
+        self.ref.child("courier_ids").observe(.value) { [weak self] (snapshot) in
+            for nextId in snapshot.value as? NSArray ?? [] {
+                guard let nextId = nextId as? String, let self = self else { continue }
+                if nextId == id {
+                    self.stack.addArrangedSubview(self.pickUpButton)
+                    self.stack.addArrangedSubview(self.deliveredButton)
+                    
                     break
                 }
             }
@@ -440,8 +515,87 @@ class DetailOrderViewController: UIViewController {
         let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
         ref.updateChildValues(["status" : "Выполнен"])
         
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm:ss"
+        let now = df.string(from: Date())
+        
+        guard let id = UserDefaults.standard.string(forKey: "id") else { return }
+        
+        Database.database().reference().child("cooked").child(id).updateChildValues([self.order?.id ?? "0" : now])
+        
+        ref.child("time").updateChildValues(["completeTime" : now])
+        
         let alert = UIAlertController(title: "Заказ выполнен!", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+        updateStatus("Выполнен")
+    }
+    
+    @objc func inWorkAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["status" : "В работе"])
+        
+        let alert = UIAlertController(title: "Заказ в работе!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        updateStatus("В работе")
+    }
+    
+    @objc func takeAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["status" : "Получен"])
+        
+        let alert = UIAlertController(title: "Заказ принят!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        updateStatus("Получен")
+    }
+    
+    @objc func pickUpAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["status" : "Получен Курьером"])
+        
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm:ss"
+        let now = df.string(from: Date())
+        
+        guard let id = UserDefaults.standard.string(forKey: "id") else { return }
+        
+        Database.database().reference().child("pickedUp").child(id).updateChildValues([self.order?.id ?? "0" : now])
+        
+        ref.child("time").updateChildValues(["pickedUpTime" : now])
+        
+        let alert = UIAlertController(title: "Заказ получен!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        updateStatus("Получен Курьером")
+    }
+    
+    @objc func deliveredAction() {
+        let ref = Database.database().reference().child("orders").child(self.order?.id ?? "0")
+        ref.updateChildValues(["status" : "Доставлен"])
+        
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm:ss"
+        let now = df.string(from: Date())
+        
+        guard let id = UserDefaults.standard.string(forKey: "id") else { return }
+        
+        Database.database().reference().child("delivered").child(id).updateChildValues([self.order?.id ?? "0" : now])
+        
+        ref.child("time").updateChildValues(["deliveredTime" : now])
+        
+        let alert = UIAlertController(title: "Заказ доставлен!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        updateStatus("Доставлен")
+    }
+    
+    
+    func updateStatus(_ status: String) {
+        DispatchQueue.main.async {
+            self.status.backgroundColor = self.configureStatusLablel(status)
+            self.status.text = status
+        }
     }
 }
